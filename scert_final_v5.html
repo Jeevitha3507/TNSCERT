@@ -1,0 +1,1906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/>
+<title>SCERT DigiBook — Tamil Nadu</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  /* ── CORAL SUNRISE THEME ── */
+  --pk:#FF4D6D;--pk2:#FF6B35;--pk3:#FF8C42;
+  --pu:#7C3AED;--pu2:#A855F7;--pu3:#C084FC;
+  --tl:#0EA5E9;--tl2:#38BDF8;
+  --gn:#10B981;--gn2:#34D399;
+  --amber:#F59E0B;--amber2:#FCD34D;
+  --navy:#0C0F1A;--navy2:#141829;--navy3:#1C2238;--navy4:#242D47;
+  --card:#1A2035;--card2:#202840;
+  --w:#fff;
+  --bg:#F0F2FF;
+  --bdr:rgba(255,255,255,.08);--bdr2:rgba(255,255,255,.15);
+  --t1:#fff;--t2:rgba(255,255,255,.85);--t3:rgba(255,255,255,.55);--t4:rgba(255,255,255,.3);
+  --dt1:#0C0F1A;--dt2:#1C2238;--dt3:#64748B;--dt4:#94A3B8;
+  --shadow:0 4px 24px rgba(0,0,0,.25);
+  --shadow-lg:0 16px 56px rgba(0,0,0,.35);
+  --shadow-pk:0 8px 32px rgba(255,77,109,.35);
+  --shadow-pu:0 8px 32px rgba(124,58,237,.35);
+  --glow-pk:0 0 40px rgba(255,77,109,.3);
+  --r:12px;--r-lg:18px;--r-xl:26px;
+  --font:'Plus Jakarta Sans',system-ui,sans-serif;
+  --font-display:'Playfair Display',serif;
+  --font-book:'Noto Serif',Georgia,serif;
+  --font-ui:'Noto Sans',system-ui,sans-serif;
+  --book-fs:19px;--book-lh:2.0;
+}
+*{font-family:var(--font)}
+html,body{height:100%;overflow:hidden;background:var(--navy);color:var(--t1)}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:10px}
+::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.25)}
+
+/* ── PAGES ── */
+.pg{display:none;height:100vh;width:100%;flex-direction:column;overflow:hidden}
+.pg.on{display:flex}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(16px);
+  background:linear-gradient(135deg,var(--pk),var(--pu));
+  color:#fff;padding:12px 24px;border-radius:40px;font-size:13px;font-weight:700;
+  z-index:9999;opacity:0;transition:all .35s cubic-bezier(.34,1.56,.64,1);
+  pointer-events:none;white-space:nowrap;box-shadow:var(--shadow-pk)}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ════════════════════════════════════════
+   LOGIN  — Stunning split with mesh bg
+   ════════════════════════════════════════ */
+#pgLogin{
+  background:var(--navy);
+  align-items:center;justify-content:center;padding:20px;position:relative;overflow:hidden
+}
+/* animated mesh background */
+#pgLogin::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 50%, rgba(255,77,109,.18) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 80% 30%, rgba(124,58,237,.18) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 60% 80%, rgba(14,165,233,.12) 0%, transparent 50%);
+  animation:meshMove 8s ease-in-out infinite alternate
+}
+@keyframes meshMove{
+  0%{background:
+    radial-gradient(ellipse 80% 60% at 20% 50%, rgba(255,77,109,.18) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 80% 30%, rgba(124,58,237,.18) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 60% 80%, rgba(14,165,233,.12) 0%, transparent 50%)}
+  100%{background:
+    radial-gradient(ellipse 80% 60% at 30% 60%, rgba(255,77,109,.22) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 70% 20%, rgba(124,58,237,.22) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 50% 70%, rgba(14,165,233,.15) 0%, transparent 50%)}
+}
+/* floating particles */
+.particle{position:absolute;border-radius:50%;pointer-events:none;animation:particleFloat linear infinite}
+@keyframes particleFloat{0%{transform:translateY(100vh) rotate(0deg);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-100px) rotate(720deg);opacity:0}}
+
+.login-card{
+  position:relative;z-index:2;display:flex;width:100%;max-width:960px;
+  background:rgba(26,32,53,.8);backdrop-filter:blur(24px);
+  border:1px solid rgba(255,255,255,.1);border-radius:28px;overflow:hidden;
+  box-shadow:0 32px 80px rgba(0,0,0,.5)
+}
+/* Left: Brand panel */
+.login-brand{
+  width:400px;flex-shrink:0;padding:52px 44px;
+  background:linear-gradient(160deg,rgba(255,77,109,.15),rgba(124,58,237,.2));
+  border-right:1px solid rgba(255,255,255,.08);position:relative;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:space-between
+}
+.lb-orb1{position:absolute;width:280px;height:280px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,77,109,.25),transparent 70%);
+  top:-60px;right:-60px;pointer-events:none}
+.lb-orb2{position:absolute;width:200px;height:200px;border-radius:50%;
+  background:radial-gradient(circle,rgba(124,58,237,.2),transparent 70%);
+  bottom:-40px;left:-40px;pointer-events:none}
+.lb-logo{display:flex;align-items:center;gap:14px;margin-bottom:36px;position:relative;z-index:1}
+.lb-icon{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;
+  font-size:26px;background:linear-gradient(135deg,var(--pk),var(--pu));
+  box-shadow:0 8px 24px rgba(255,77,109,.4)}
+.lb-brand-name{font-family:var(--font-display);font-size:22px;font-weight:700;color:#fff;line-height:1.2}
+.lb-brand-sub{font-size:11px;color:var(--t3);margin-top:3px;letter-spacing:.5px}
+.lb-headline{font-family:var(--font-display);font-size:38px;font-weight:800;color:#fff;line-height:1.2;
+  margin-bottom:16px;position:relative;z-index:1}
+.lb-headline .hl{
+  background:linear-gradient(135deg,var(--pk),var(--amber));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text
+}
+.lb-desc{font-size:14px;color:var(--t3);line-height:1.8;position:relative;z-index:1;margin-bottom:32px}
+.lb-stats{display:flex;gap:24px;position:relative;z-index:1}
+.lb-stat{text-align:center}
+.lb-stat-n{font-size:26px;font-weight:800;
+  background:linear-gradient(135deg,var(--amber),var(--pk));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.lb-stat-l{font-size:11px;color:var(--t3);margin-top:2px;letter-spacing:.3px}
+/* Right: Form panel */
+.login-form{flex:1;padding:52px 48px;display:flex;flex-direction:column;justify-content:center;background:transparent}
+.lf-title{font-size:28px;font-weight:800;color:#fff;margin-bottom:6px}
+.lf-sub{font-size:14px;color:var(--t3);margin-bottom:28px;line-height:1.6}
+/* Role pills */
+.role-tabs{display:flex;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;padding:5px;gap:4px;margin-bottom:24px}
+.rtab{flex:1;padding:10px;text-align:center;border-radius:10px;font-size:13px;font-weight:600;
+  cursor:pointer;border:none;background:transparent;color:var(--t3);transition:all .25s}
+.rtab:hover:not(.on){color:var(--t2);background:rgba(255,255,255,.06)}
+.rtab.on{background:linear-gradient(135deg,var(--pk),var(--pu));color:#fff;font-weight:700;
+  box-shadow:0 4px 14px rgba(255,77,109,.35)}
+/* Info note */
+.student-note{display:none;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);
+  border-radius:var(--r);padding:12px 15px;margin-bottom:18px;font-size:13px;
+  color:#FCD34D;line-height:1.6}
+.student-note.show{display:block}
+.sn-title{font-weight:800;margin-bottom:3px;font-size:13px}
+/* Inputs */
+.field{margin-bottom:16px}
+.field-label{font-size:12px;font-weight:700;color:var(--t3);display:block;margin-bottom:7px;letter-spacing:.4px;text-transform:uppercase}
+.field-wrap{position:relative}
+.field-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:16px;pointer-events:none}
+.field-inp{
+  width:100%;padding:13px 16px 13px 42px;
+  background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);
+  border-radius:var(--r);font-size:15px;color:#fff;outline:none;transition:all .2s
+}
+.field-inp::placeholder{color:var(--t4)}
+.field-inp:focus{border-color:var(--pk);background:rgba(255,77,109,.06);box-shadow:0 0 0 3px rgba(255,77,109,.12)}
+.field-hint{font-size:12px;color:var(--t4);margin-top:6px;display:flex;align-items:center;gap:5px}
+.field-inp-pwd{padding-left:42px}
+/* Buttons */
+.btn-login{
+  width:100%;padding:15px;margin-bottom:12px;
+  background:linear-gradient(135deg,var(--pk),var(--pk2),var(--pu));
+  color:#fff;border:none;border-radius:var(--r);font-size:16px;font-weight:800;
+  cursor:pointer;letter-spacing:.3px;transition:all .25s;
+  box-shadow:0 6px 24px rgba(255,77,109,.4);position:relative;overflow:hidden
+}
+.btn-login::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.15),transparent);
+  opacity:0;transition:opacity .2s}
+.btn-login:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(255,77,109,.55)}
+.btn-login:hover::after{opacity:1}
+.btn-sso{
+  width:100%;padding:13px;background:rgba(255,255,255,.06);color:var(--t2);
+  border:1.5px solid rgba(255,255,255,.12);border-radius:var(--r);font-size:14px;
+  font-weight:700;cursor:pointer;transition:all .2s;
+  display:flex;align-items:center;justify-content:center;gap:10px
+}
+.btn-sso:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);color:#fff}
+.or-sep{display:flex;align-items:center;gap:12px;margin:14px 0;color:var(--t4);font-size:12px}
+.or-sep::before,.or-sep::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.08)}
+.forgot-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;font-size:13px}
+.chk-label{display:flex;align-items:center;gap:8px;cursor:pointer;color:var(--t3)}
+.forgot-link{color:var(--pk);cursor:pointer;font-weight:700}
+.forgot-link:hover{text-decoration:underline}
+.login-footer{text-align:center;font-size:11px;color:var(--t4);margin-top:18px;letter-spacing:.3px}
+@media(max-width:700px){.login-brand{display:none}.login-form{padding:36px 28px}}
+
+/* ════════════════════════════════════════
+   TOP NAV BAR
+   ════════════════════════════════════════ */
+.topbar{
+  height:64px;background:var(--navy2);
+  border-bottom:1px solid rgba(255,255,255,.07);
+  display:flex;align-items:center;padding:0 24px;gap:12px;flex-shrink:0;
+  box-shadow:0 4px 24px rgba(0,0,0,.3);z-index:200;position:relative
+}
+.topbar::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--pk),var(--pu),var(--tl),var(--gn));opacity:.7}
+.tb-logo{display:flex;align-items:center;gap:12px;min-width:150px}
+.tb-logo-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;font-size:19px;
+  background:linear-gradient(135deg,var(--pk),var(--pu));
+  box-shadow:0 4px 12px rgba(255,77,109,.4);flex-shrink:0}
+.tb-logo-text{font-size:18px;font-weight:800;color:#fff;letter-spacing:-.3px}
+.tb-logo-text span{
+  background:linear-gradient(135deg,var(--pk),var(--amber));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+/* Search */
+.tb-search{
+  flex:1;max-width:440px;display:flex;align-items:center;
+  background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.08);
+  border-radius:40px;padding:0 18px;height:40px;gap:9px;transition:all .2s
+}
+.tb-search:focus-within{background:rgba(255,255,255,.09);border-color:rgba(255,77,109,.5);
+  box-shadow:0 0 0 3px rgba(255,77,109,.1)}
+.tb-search input{border:none;background:transparent;outline:none;font-size:14px;color:#fff;flex:1}
+.tb-search input::placeholder{color:var(--t4)}
+.tb-search-icon{color:var(--t4);font-size:15px}
+/* Right controls */
+.tb-right{display:flex;align-items:center;gap:8px;margin-left:auto}
+.tb-chip{
+  display:flex;align-items:center;gap:6px;padding:7px 14px;height:38px;
+  background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);
+  border-radius:10px;font-size:13px;font-weight:700;color:var(--t2);cursor:pointer;
+  user-select:none;transition:all .2s;position:relative
+}
+.tb-chip:hover{background:rgba(255,255,255,.1);border-color:rgba(255,77,109,.4);color:#fff}
+.tb-chip-arrow{font-size:10px;color:var(--t4)}
+/* Account */
+.acct-pill{
+  display:flex;align-items:center;gap:10px;padding:5px 14px 5px 5px;height:42px;
+  background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);
+  border-radius:40px;cursor:pointer;transition:all .2s;position:relative
+}
+.acct-pill:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2)}
+.acct-av{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-size:12px;font-weight:800;
+  background:linear-gradient(135deg,var(--pk),var(--pu));flex-shrink:0}
+.acct-name{font-size:13px;font-weight:700;color:#fff}
+.acct-role{font-size:10px;color:var(--t3);line-height:1}
+.a11y-btn{width:40px;height:40px;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;cursor:pointer;
+  transition:all .2s;color:var(--t2)}
+.a11y-btn:hover{background:rgba(255,77,109,.15);border-color:rgba(255,77,109,.4);color:var(--pk)}
+/* Dropdown */
+.drop-menu{
+  position:absolute;top:calc(100%+8px);left:0;background:var(--card);
+  border:1px solid rgba(255,255,255,.1);border-radius:16px;box-shadow:var(--shadow-lg);
+  z-index:500;min-width:170px;display:none;overflow:hidden;padding:6px;
+  animation:dropPop .18s cubic-bezier(.34,1.56,.64,1)
+}
+@keyframes dropPop{from{opacity:0;transform:translateY(-8px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+.drop-menu.open{display:block}
+.dm-item{padding:10px 14px;font-size:13px;cursor:pointer;color:var(--t2);border-radius:10px;
+  transition:all .15s;font-weight:500}
+.dm-item:hover{background:rgba(255,77,109,.15);color:var(--pk)}
+.dm-item.on{background:linear-gradient(135deg,rgba(255,77,109,.2),rgba(124,58,237,.2));
+  color:#fff;font-weight:700}
+/* Language dropdown */
+.lang-drop{position:relative}
+.lang-menu{position:absolute;top:calc(100%+8px);right:0;background:var(--card);
+  border:1px solid rgba(255,255,255,.1);border-radius:16px;box-shadow:var(--shadow-lg);
+  z-index:500;min-width:190px;display:none;overflow:hidden;padding:6px;
+  animation:dropPop .18s cubic-bezier(.34,1.56,.64,1)}
+.lang-menu.open{display:block}
+.lm-item{padding:10px 14px;font-size:13px;cursor:pointer;color:var(--t2);border-radius:10px;
+  display:flex;align-items:center;gap:10px;font-weight:500;transition:all .15s}
+.lm-item:hover{background:rgba(255,77,109,.12);color:var(--pk)}
+.lm-item.on{background:linear-gradient(135deg,rgba(255,77,109,.2),rgba(124,58,237,.15));color:#fff;font-weight:700}
+.lm-flag{font-size:18px}
+
+/* ════════════════════════════════════════
+   DASHBOARD
+   ════════════════════════════════════════ */
+#pgDash .scrollbody{flex:1;overflow-y:auto;background:var(--navy)}
+.dash-inner{max-width:1280px;margin:0 auto;padding:32px 28px}
+
+/* HERO — breathtaking */
+.hero{
+  position:relative;border-radius:var(--r-xl);padding:44px 48px;
+  display:flex;align-items:center;gap:32px;margin-bottom:40px;overflow:hidden;
+  min-height:230px
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,#1A0A2E 0%,#2D1B69 30%,#7C3AED 60%,#FF4D6D 85%,#FF6B35 100%);
+  z-index:0
+}
+.hero-mesh{
+  position:absolute;inset:0;z-index:1;
+  background:
+    radial-gradient(ellipse 60% 80% at 90% 50%, rgba(255,77,109,.3) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 60% at 10% 80%, rgba(14,165,233,.2) 0%, transparent 50%)
+}
+@keyframes heroMesh{
+  0%,100%{opacity:1}50%{opacity:.7}
+}
+.hero-grid{
+  position:absolute;inset:0;z-index:1;opacity:.06;
+  background-image:linear-gradient(rgba(255,255,255,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.5) 1px,transparent 1px);
+  background-size:40px 40px
+}
+.hero-glow{
+  position:absolute;right:200px;top:-60px;width:300px;height:300px;
+  border-radius:50%;background:rgba(255,77,109,.2);filter:blur(60px);z-index:1;
+  animation:heroGlow 4s ease-in-out infinite alternate
+}
+@keyframes heroGlow{0%{transform:scale(1)}100%{transform:scale(1.2)}}
+.hero-content{position:relative;z-index:3;flex:1}
+.hero-greeting{font-size:14px;color:rgba(255,255,255,.7);font-weight:600;margin-bottom:8px;
+  letter-spacing:.5px;text-transform:uppercase;display:flex;align-items:center;gap:8px}
+.hero-greeting span{width:24px;height:2px;background:var(--pk);border-radius:1px;display:inline-block}
+.hero-name{font-family:var(--font-display);font-size:36px;font-weight:800;color:#fff;
+  line-height:1.15;margin-bottom:10px}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,.12);backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:30px;padding:7px 18px;font-size:13px;color:#fff;
+  font-weight:700;margin-bottom:18px
+}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.75);margin-bottom:28px;line-height:1.6}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.hbtn-p{
+  padding:14px 28px;background:#fff;color:var(--navy);
+  border:none;border-radius:var(--r);font-size:15px;font-weight:800;
+  cursor:pointer;display:flex;align-items:center;gap:8px;transition:all .25s;
+  box-shadow:0 4px 20px rgba(0,0,0,.25)
+}
+.hbtn-p:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 10px 32px rgba(0,0,0,.35)}
+.hbtn-s{
+  padding:14px 28px;background:rgba(255,255,255,.15);color:#fff;
+  border:2px solid rgba(255,255,255,.3);backdrop-filter:blur(10px);
+  border-radius:var(--r);font-size:15px;font-weight:700;cursor:pointer;transition:all .25s
+}
+.hbtn-s:hover{background:rgba(255,255,255,.25);transform:translateY(-2px)}
+/* Hero illustration */
+.hero-art{position:relative;z-index:3;flex-shrink:0;width:280px;height:190px}
+.h-globe{font-size:80px;position:absolute;left:0;bottom:0;
+  filter:drop-shadow(0 8px 24px rgba(0,0,0,.4));
+  animation:float1 3.5s ease-in-out infinite}
+.h-kid{font-size:64px;position:absolute;filter:drop-shadow(0 6px 16px rgba(0,0,0,.35));
+  animation:float1 3.5s ease-in-out infinite}
+.h-kid:nth-child(2){right:110px;bottom:8px;animation-delay:.6s;font-size:68px}
+.h-kid:nth-child(3){right:50px;bottom:0;animation-delay:1.2s}
+.h-kid:nth-child(4){right:0;bottom:12px;animation-delay:1.8s;font-size:60px}
+.h-star{position:absolute;color:rgba(255,215,0,.9);font-size:16px;
+  animation:float1 2s ease-in-out infinite;filter:drop-shadow(0 2px 6px rgba(255,200,0,.5))}
+@keyframes float1{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+
+/* Section headers */
+.sec-row{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:20px}
+.sec-label{font-size:11px;font-weight:700;color:var(--pk);text-transform:uppercase;
+  letter-spacing:.8px;margin-bottom:4px}
+.sec-title{font-size:22px;font-weight:800;color:#fff;display:flex;align-items:center;gap:10px}
+.sec-title em{font-style:normal;font-size:16px;font-weight:500;color:var(--t3)}
+.sec-link{font-size:13px;color:var(--pk);font-weight:700;cursor:pointer}
+.sec-link:hover{text-decoration:underline;color:var(--pk2)}
+/* Tags */
+.tag-chip{
+  display:inline-flex;align-items:center;gap:6px;padding:5px 14px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  border-radius:25px;font-size:12px;color:var(--t3);cursor:pointer;font-weight:600;
+  transition:all .2s
+}
+.tag-chip:hover{border-color:rgba(255,77,109,.5);color:var(--pk);background:rgba(255,77,109,.08)}
+.tag-row{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+
+/* BOOK CARDS */
+.books-scroll{display:flex;gap:22px;overflow-x:auto;padding-bottom:16px;padding-top:4px}
+.books-scroll::-webkit-scrollbar{height:4px}
+.books-scroll::-webkit-scrollbar-thumb{background:rgba(255,77,109,.3)}
+.book-card{
+  min-width:215px;max-width:215px;
+  background:var(--card);border:1px solid rgba(255,255,255,.08);
+  border-radius:20px;overflow:hidden;cursor:pointer;flex-shrink:0;
+  transition:transform .4s cubic-bezier(.34,1.56,.64,1),box-shadow .4s,border-color .2s;
+  position:relative
+}
+.book-card:hover{
+  transform:translateY(-16px) scale(1.04) perspective(600px) rotateX(2deg);
+  box-shadow:0 32px 64px rgba(0,0,0,.5),var(--glow-pk);
+  border-color:rgba(255,77,109,.4)
+}
+.book-card:hover .book-icon{transform:scale(1.12) translateY(-4px)}
+.book-card:hover .book-shine{opacity:1}
+/* Spine */
+.book-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:8px;
+  background:linear-gradient(to right,rgba(0,0,0,.4),rgba(0,0,0,.1));z-index:3}
+/* Shimmer */
+.book-shine{position:absolute;inset:0;z-index:4;pointer-events:none;opacity:0;
+  background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.12) 50%,transparent 65%);
+  transition:opacity .4s}
+.book-cover{
+  height:196px;position:relative;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:6px;overflow:hidden
+}
+.book-cover::after{content:'';position:absolute;bottom:0;left:0;right:0;height:40px;
+  background:linear-gradient(to top,rgba(0,0,0,.3),transparent)}
+.book-icon{font-size:72px;transition:transform .4s cubic-bezier(.34,1.56,.64,1);
+  filter:drop-shadow(0 6px 18px rgba(0,0,0,.4));position:relative;z-index:2}
+.book-subj-label{font-size:11px;font-weight:800;color:rgba(255,255,255,.75);
+  letter-spacing:1.5px;text-transform:uppercase;position:relative;z-index:2}
+.book-prog{position:absolute;top:12px;right:12px;z-index:5;
+  background:rgba(255,255,255,.92);border-radius:20px;padding:4px 11px;
+  font-size:12px;font-weight:800;color:var(--navy);
+  box-shadow:0 2px 10px rgba(0,0,0,.25);backdrop-filter:blur(4px)}
+.book-prog.active{background:linear-gradient(135deg,var(--gn),var(--tl));color:#fff}
+.book-info{padding:16px 18px}
+.book-title{font-size:16px;font-weight:800;color:#fff;margin-bottom:4px;line-height:1.3}
+.book-pages{font-size:12px;color:var(--t3);margin-bottom:10px;display:flex;align-items:center;gap:5px}
+.book-pbar-wrap{height:4px;background:rgba(255,255,255,.08);border-radius:2px;margin-bottom:14px;overflow:hidden}
+.book-pbar{height:100%;border-radius:2px}
+.book-btn{
+  width:100%;padding:11px;border-radius:10px;font-size:14px;font-weight:800;
+  cursor:pointer;transition:all .25s;border:none;letter-spacing:.2px
+}
+.book-btn.start{background:rgba(255,255,255,.07);color:var(--t2);border:1px solid rgba(255,255,255,.1)}
+.book-btn.start:hover{background:linear-gradient(135deg,var(--pu),var(--pk));color:#fff;border-color:transparent;transform:scale(1.02)}
+.book-btn.cont{background:linear-gradient(135deg,var(--pk),var(--pk2));color:#fff;
+  box-shadow:0 4px 14px rgba(255,77,109,.35)}
+.book-btn.cont:hover{background:linear-gradient(135deg,var(--pk2),var(--pu));transform:scale(1.02);box-shadow:0 6px 20px rgba(255,77,109,.5)}
+
+/* LEADERBOARD */
+.lb-card{background:var(--card);border:1px solid rgba(255,255,255,.08);
+  border-radius:var(--r-lg);overflow:hidden}
+.lb-grid{display:grid;grid-template-columns:repeat(3,1fr)}
+@media(max-width:860px){.lb-grid{grid-template-columns:1fr}}
+.lb-col-inner{display:flex;flex-direction:column}
+.lb-item{display:flex;align-items:center;gap:12px;padding:14px 18px;
+  border-bottom:1px solid rgba(255,255,255,.05);transition:background .15s;cursor:pointer}
+.lb-item:hover{background:rgba(255,77,109,.06)}
+.lb-item:last-child{border-bottom:none}
+.lb-col:not(:last-child) .lb-item{border-right:1px solid rgba(255,255,255,.05)}
+.lb-rank{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-size:12px;font-weight:800;flex-shrink:0}
+.lb-rank.r1{background:linear-gradient(135deg,#FFD700,#FFA500);color:#5C3800;box-shadow:0 2px 10px rgba(255,165,0,.4)}
+.lb-rank.r2{background:linear-gradient(135deg,#E2E8F0,#94A3B8);color:#1E293B;box-shadow:0 2px 8px rgba(148,163,184,.3)}
+.lb-rank.r3{background:linear-gradient(135deg,#CD7F32,#92400E);color:#fff;box-shadow:0 2px 8px rgba(205,127,50,.4)}
+.lb-rank.rn{background:rgba(255,255,255,.08);color:var(--t3)}
+.lb-av{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--pu),var(--pk));
+  display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.lb-info{flex:1;min-width:0}
+.lb-name{font-size:14px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lb-school{font-size:11px;color:var(--t3);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lb-score{font-size:12px;color:var(--pk);font-weight:800;margin-top:2px}
+
+/* ════════════════════════════════════════
+   OTHER PAGES (class, chapter, subject)
+   ════════════════════════════════════════ */
+.page-bg{flex:1;overflow-y:auto;background:var(--navy)}
+.page-inner{max-width:1100px;margin:0 auto;padding:28px}
+.breadcrumb{background:var(--navy2);border-bottom:1px solid rgba(255,255,255,.07);
+  padding:11px 24px;display:flex;align-items:center;gap:7px;font-size:13px;
+  color:var(--t3);flex-shrink:0;flex-wrap:wrap}
+.bc{cursor:pointer;color:var(--t3);font-weight:500;transition:color .15s}
+.bc:hover{color:var(--pk)}
+.bc.cur{color:#fff;font-weight:700;cursor:default}
+.bc-sep{color:rgba(255,255,255,.2)}
+
+/* Class grid */
+.class-grid-pg{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+@media(max-width:900px){.class-grid-pg{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:600px){.class-grid-pg{grid-template-columns:repeat(3,1fr)}}
+.cls-card{background:var(--card);border:1px solid rgba(255,255,255,.08);
+  border-radius:16px;overflow:hidden;cursor:pointer;transition:all .25s;text-align:center}
+.cls-card:hover,.cls-card.sel{border-color:var(--pk);transform:translateY(-4px);
+  box-shadow:0 12px 32px rgba(255,77,109,.2)}
+.cls-card.sel{border-width:2px;background:rgba(255,77,109,.08)}
+.cls-cover{height:100px;display:flex;align-items:center;justify-content:center;
+  font-size:40px;font-weight:900;font-family:var(--font-display)}
+.cls-lbl{padding:10px;font-size:13px;font-weight:700;color:var(--t2);
+  border-top:1px solid rgba(255,255,255,.06)}
+
+/* Subject list */
+.subj-list{background:var(--card);border:1px solid rgba(255,255,255,.07);
+  border-radius:18px;overflow:hidden}
+.subj-row{display:flex;align-items:center;gap:14px;padding:16px 20px;
+  border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer;transition:all .15s}
+.subj-row:last-child{border-bottom:none}
+.subj-row:hover{background:rgba(255,77,109,.07)}
+.subj-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+.subj-info{flex:1}
+.subj-name{font-size:15px;font-weight:700;color:#fff}
+.subj-meta{font-size:12px;color:var(--t3);margin-top:3px}
+.subj-prog{width:110px}
+.pbar-wrap{height:5px;background:rgba(255,255,255,.08);border-radius:3px;margin-top:6px;overflow:hidden}
+.pbar-fill{height:100%;border-radius:3px}
+.pill{display:inline-block;padding:3px 11px;border-radius:20px;font-size:12px;font-weight:700}
+.pill-pk{background:rgba(255,77,109,.2);color:var(--pk)}
+.pill-gn{background:rgba(16,185,129,.2);color:var(--gn)}
+.pill-am{background:rgba(245,158,11,.2);color:var(--amber)}
+.pill-gr{background:rgba(255,255,255,.07);color:var(--t3)}
+
+/* Chapter cards */
+.ch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:16px}
+.ch-card{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;
+  overflow:hidden;cursor:pointer;transition:all .25s;position:relative}
+.ch-card:hover{border-color:rgba(255,77,109,.4);transform:translateY(-5px);
+  box-shadow:0 16px 40px rgba(0,0,0,.4)}
+.ch-cover{height:130px;display:flex;align-items:center;justify-content:center;font-size:38px;position:relative}
+.ch-prog{position:absolute;top:8px;right:8px;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);
+  border-radius:20px;padding:3px 10px;font-size:11px;font-weight:800;color:#fff;border:1px solid rgba(255,255,255,.15)}
+.ch-info{padding:12px 14px}
+.ch-name{font-size:13px;font-weight:800;color:#fff;line-height:1.4}
+.ch-sub{font-size:11px;color:var(--t3);margin-top:3px}
+
+/* Sessions */
+.sess-list{margin-top:24px;display:flex;flex-direction:column;gap:10px}
+.sess-item{display:flex;align-items:center;gap:14px;padding:16px 20px;
+  background:var(--card);border:1px solid rgba(255,255,255,.07);
+  border-radius:14px;cursor:pointer;transition:all .2s}
+.sess-item:hover{border-color:rgba(255,77,109,.4);background:rgba(255,77,109,.05)}
+.sess-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;border:2px solid rgba(255,255,255,.2)}
+.sess-dot.active{background:var(--pk);border-color:var(--pk);box-shadow:0 0 8px rgba(255,77,109,.6)}
+.sess-dot.done{background:var(--gn);border-color:var(--gn)}
+.sess-title{font-size:15px;font-weight:700;color:#fff}
+.sess-sub{font-size:12px;color:var(--t3);margin-top:3px}
+.sess-btn{padding:9px 22px;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer;border:none;transition:all .2s}
+.sess-btn.start{background:rgba(255,255,255,.07);color:var(--t2);border:1px solid rgba(255,255,255,.1)}
+.sess-btn.start:hover{background:linear-gradient(135deg,var(--pu),var(--pk));color:#fff;border-color:transparent}
+.sess-btn.cont{background:linear-gradient(135deg,var(--pk),var(--pk2));color:#fff;box-shadow:0 3px 12px rgba(255,77,109,.35)}
+
+/* ════════════════════════════════════════
+   READER
+   ════════════════════════════════════════ */
+#pgReader{flex-direction:column}
+/* Reader nav */
+.reader-nav{
+  height:54px;background:var(--navy2);
+  border-bottom:1px solid rgba(255,255,255,.07);
+  display:flex;align-items:center;flex-shrink:0;overflow:hidden
+}
+.reader-nav::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1.5px;
+  background:linear-gradient(90deg,var(--pk),var(--pu),var(--tl));opacity:.5}
+.rn-logo{width:220px;padding:0 16px;border-right:1px solid rgba(255,255,255,.07);
+  height:100%;display:flex;align-items:center;gap:10px;flex-shrink:0}
+.rn-book-thumb{width:30px;height:38px;border-radius:5px;overflow:hidden;flex-shrink:0;
+  background:linear-gradient(135deg,var(--pk),var(--pu));display:flex;align-items:center;justify-content:center;font-size:17px}
+.rn-book-meta{min-width:0}
+.rn-book-title{font-size:12px;font-weight:700;color:var(--t2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rn-book-sub{font-size:10px;color:var(--t3);margin-top:1px}
+.rn-back{height:100%;padding:0 16px;border:none;background:none;color:var(--t3);
+  font-size:14px;font-weight:700;cursor:pointer;border-right:1px solid rgba(255,255,255,.07);
+  display:flex;align-items:center;gap:5px;transition:all .2s}
+.rn-back:hover{color:var(--pk);background:rgba(255,77,109,.07)}
+.rn-chapter{flex:1;padding:0 20px;font-size:14px;font-weight:700;color:var(--t2);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rn-listen{
+  display:flex;align-items:center;gap:7px;padding:8px 18px;margin-right:12px;
+  background:linear-gradient(135deg,var(--pk),var(--pk2));color:#fff;border:none;
+  border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;
+  box-shadow:0 3px 12px rgba(255,77,109,.4);transition:all .2s
+}
+.rn-listen:hover{background:linear-gradient(135deg,var(--pk2),var(--pu));transform:scale(1.03)}
+.rn-lang{display:flex;align-items:center;gap:6px;padding:7px 14px;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);
+  border-radius:10px;font-size:13px;font-weight:700;color:var(--t2);cursor:pointer;
+  margin-right:10px;position:relative}
+.rn-lang:hover{border-color:rgba(255,77,109,.5);color:var(--pk)}
+.rn-av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--pk),var(--pu));
+  display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;
+  color:#fff;margin-right:14px;cursor:pointer;flex-shrink:0}
+
+/* Reader toolbar */
+.reader-toolbar{
+  height:46px;background:var(--navy3);border-bottom:1px solid rgba(255,255,255,.06);
+  display:flex;align-items:center;padding:0 14px;gap:4px;flex-shrink:0;overflow-x:auto
+}
+.reader-toolbar::-webkit-scrollbar{height:0}
+.rt-btn{width:36px;height:34px;border-radius:8px;border:none;background:transparent;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;
+  color:var(--t3);transition:all .15s;flex-shrink:0}
+.rt-btn:hover{background:rgba(255,77,109,.15);color:var(--pk)}
+.rt-btn.on{background:linear-gradient(135deg,var(--pk),var(--pu));color:#fff;
+  box-shadow:0 2px 10px rgba(255,77,109,.35)}
+.rt-sep{width:1px;height:22px;background:rgba(255,255,255,.08);margin:0 3px;flex-shrink:0}
+.rt-search-bar{
+  flex:1;max-width:260px;display:flex;align-items:center;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);
+  border-radius:18px;padding:0 12px;height:30px;gap:6px;margin-left:8px
+}
+.rt-search-bar input{border:none;background:transparent;outline:none;font-size:12px;color:#fff;flex:1}
+.rt-search-bar input::placeholder{color:var(--t4)}
+.rt-session-sel{
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);
+  border-radius:9px;padding:5px 12px;font-size:13px;font-weight:700;color:#fff;
+  cursor:pointer;margin-left:auto;white-space:nowrap;outline:none;
+  -webkit-appearance:none
+}
+
+/* Reader body */
+.reader-body{display:flex;flex:1;overflow:hidden;min-height:0;position:relative}
+/* Index sidebar */
+.r-index{width:240px;background:var(--navy2);border-right:1px solid rgba(255,255,255,.07);
+  flex-shrink:0;overflow:hidden;transition:width .3s;display:flex;flex-direction:column}
+.r-index.closed{width:0}
+.r-index-hd{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.07);
+  display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.r-index-hd-title{font-size:12px;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:.6px}
+.r-index-acts{display:flex;gap:10px}
+.r-index-act{font-size:11px;color:var(--pk);cursor:pointer;font-weight:700}
+.r-index-act:hover{text-decoration:underline}
+.r-index-body{flex:1;overflow-y:auto}
+.toc-sec{padding:8px 16px;background:var(--navy3);font-size:10px;font-weight:800;
+  color:var(--t4);text-transform:uppercase;letter-spacing:.6px;border-bottom:1px solid rgba(255,255,255,.05);
+  display:flex;align-items:center;justify-content:space-between}
+.toc-badge{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:800;
+  background:linear-gradient(135deg,var(--pk),var(--pu));color:#fff}
+.toc-badge.done{background:linear-gradient(135deg,var(--gn),var(--tl))}
+.toc-item{padding:10px 16px;font-size:13px;color:var(--t3);cursor:pointer;
+  border-left:3px solid transparent;border-bottom:1px solid rgba(255,255,255,.03);
+  display:flex;align-items:center;justify-content:space-between;transition:all .15s;line-height:1.4}
+.toc-item:hover{background:rgba(255,77,109,.07);color:var(--t2)}
+.toc-item.on{background:rgba(255,77,109,.1);border-left-color:var(--pk);color:#fff;font-weight:600}
+.toc-clarified{font-size:10px;color:var(--pk2);font-weight:700}
+.idx-toggle{width:16px;background:var(--navy3);border-right:1px solid rgba(255,255,255,.07);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  font-size:10px;color:var(--t4);flex-shrink:0;writing-mode:vertical-rl}
+.idx-toggle:hover{background:rgba(255,77,109,.1);color:var(--pk)}
+
+/* Main read area */
+.r-main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+.r-chapter-bar{
+  height:46px;background:var(--navy3);border-bottom:1px solid rgba(255,255,255,.06);
+  padding:0 20px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0
+}
+.r-chapter-title{font-size:13px;font-weight:700;color:var(--t3)}
+.r-chapter-nav{display:flex;align-items:center;gap:8px}
+.r-nav-btn{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:13px;color:var(--t3);transition:all .2s}
+.r-nav-btn:hover{background:rgba(255,77,109,.2);border-color:var(--pk);color:var(--pk)}
+.r-expand{width:30px;height:30px;border-radius:8px;background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:12px;color:var(--t3)}
+/* Scroll area */
+.r-scroll{flex:1;overflow-y:auto;background:#FAFBFF}
+/* Book content — TN textbook layout */
+.book-content{max-width:740px;margin:0 auto;padding:36px 28px;
+  font-family:var(--font-book);font-size:19px;line-height:2.0;color:#0C0F1A;
+  background:#fff;min-height:100%;letter-spacing:.01em}
+@media(min-width:1100px){.book-content{padding:40px 52px}}
+.book-content h2{font-family:var(--font);font-size:24px;font-weight:800;color:#0C0F1A;
+  margin:28px 0 14px;line-height:1.3;padding-left:16px;
+  border-left:5px solid var(--pk);position:relative}
+.book-content h3{font-family:var(--font);font-size:20px;font-weight:700;
+  color:#1C2238;margin:22px 0 10px}
+.book-content p{margin-bottom:18px;text-align:justify}
+/* Session label */
+.session-marker{display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:20px;flex-wrap:wrap;gap:10px;font-family:var(--font)}
+.sess-chip{background:linear-gradient(135deg,var(--pk),var(--pu));color:#fff;
+  padding:5px 16px;border-radius:20px;font-size:12px;font-weight:700;letter-spacing:.3px}
+.sess-actions{display:flex;gap:8px}
+.sess-act-btn{padding:5px 14px;background:#F1F5F9;border:1.5px solid #E2E8F0;
+  border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;color:#475569;transition:all .2s}
+.sess-act-btn:hover{border-color:var(--pk);color:#FF4D6D;background:#FFF5F7}
+.sess-act-btn.on{background:linear-gradient(135deg,var(--pk),var(--pu));color:#fff;border-color:transparent}
+/* Callouts */
+.callout{border-left:5px solid;border-radius:0 var(--r) var(--r) 0;padding:14px 18px;margin:18px 0;font-size:15px;line-height:1.7;font-family:var(--font)}
+.callout-orange{border-color:#F97316;background:#FFF7ED}
+.callout-orange strong{color:#EA580C}
+.callout-purple{border-color:#7C3AED;background:#F5F3FF}
+.callout-purple strong{color:#6D28D9}
+/* Highlighted words */
+.word-hl{color:var(--pk);font-weight:700;cursor:pointer;text-decoration:underline;
+  text-decoration-style:dotted;text-decoration-color:rgba(255,77,109,.5);
+  transition:all .15s}
+.word-hl:hover{background:#FFF5F7;border-radius:4px;padding:0 3px}
+/* Audio player */
+.audio-box{background:linear-gradient(135deg,#FFF7ED,#FFF5F7);border:1.5px solid #FECACA;
+  border-radius:var(--r-lg);padding:16px 18px;margin:14px 0;font-family:var(--font)}
+.audio-top{font-size:13px;font-weight:800;color:#DC2626;margin-bottom:11px;display:flex;align-items:center;gap:8px}
+.audio-controls{display:flex;align-items:center;gap:11px}
+.play-btn{width:40px;height:40px;background:linear-gradient(135deg,var(--pk),var(--pu));
+  border-radius:50%;border:none;cursor:pointer;color:#fff;font-size:14px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  box-shadow:0 3px 12px rgba(255,77,109,.4);transition:all .2s}
+.play-btn:hover{transform:scale(1.1);box-shadow:0 5px 18px rgba(255,77,109,.6)}
+.a-track{flex:1;height:6px;background:#FEE2E2;border-radius:3px;cursor:pointer;overflow:hidden}
+.a-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--pk),var(--pu))}
+.a-time{font-size:12px;color:#DC2626;font-weight:700;min-width:70px;text-align:right}
+.a-modes{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.a-mode{padding:5px 13px;border:1.5px solid #FECACA;border-radius:20px;font-size:12px;
+  font-weight:700;cursor:pointer;background:#fff;color:#DC2626;transition:all .2s}
+.a-mode:hover,.a-mode.on{background:linear-gradient(135deg,var(--pk),var(--pu));color:#fff;border-color:transparent}
+/* Word meaning */
+.word-box{background:#fff;border:2px solid var(--pk);border-radius:var(--r-lg);
+  padding:18px;margin:12px 0;box-shadow:0 4px 20px rgba(255,77,109,.15);
+  font-family:var(--font);animation:slideDown .2s ease}
+@keyframes slideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.wb-word{font-size:22px;font-weight:800;
+  background:linear-gradient(135deg,var(--pk),var(--pu));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.wb-pos{font-size:12px;color:#94A3B8;margin:3px 0 8px;letter-spacing:.3px}
+.wb-def{font-size:15px;color:#334155;line-height:1.7;margin-bottom:8px;font-family:var(--font-book)}
+.wb-tamil{font-size:14px;color:#94A3B8;margin-bottom:12px}
+.wb-tamil strong{color:#7C3AED;font-family:var(--font)}
+.wb-btns{display:flex;gap:8px;flex-wrap:wrap}
+.wb-btn{padding:7px 16px;border:1.5px solid var(--pk);border-radius:20px;background:#fff;
+  color:var(--pk);font-size:13px;font-weight:700;cursor:pointer;transition:all .2s}
+.wb-btn:hover{background:linear-gradient(135deg,var(--pk),var(--pu));color:#fff;border-color:transparent}
+/* Highlight toolbar */
+.hl-bar{background:var(--navy);border-radius:var(--r);padding:7px 12px;display:none;
+  gap:6px;margin:8px 0;align-items:center;flex-wrap:wrap;font-family:var(--font);
+  border:1px solid rgba(255,255,255,.1)}
+.hl-bar.show{display:flex}
+.hl-dot{width:24px;height:24px;border-radius:50%;cursor:pointer;
+  border:2px solid rgba(255,255,255,.25);transition:transform .2s}
+.hl-dot:hover{transform:scale(1.25)}
+.hl-lbl{font-size:12px;color:var(--t3);font-weight:600}
+.hl-act{padding:4px 11px;border:1px solid rgba(255,255,255,.15);border-radius:15px;
+  font-size:11px;cursor:pointer;background:transparent;color:var(--t3)}
+.hl-act:hover{background:rgba(255,77,109,.15);color:var(--pk);border-color:var(--pk)}
+/* Interactive diagram */
+.diagram-box{background:linear-gradient(135deg,#F0F4FF,#F5F3FF);border-radius:var(--r-lg);
+  padding:20px;margin:18px 0;border:1.5px solid #DDD6FE;font-family:var(--font)}
+.step-flow{display:flex;align-items:center;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:14px}
+.step-node{background:#fff;border:2px solid #7C3AED;border-radius:var(--r);padding:10px 16px;
+  font-size:13px;cursor:pointer;font-weight:700;color:#7C3AED;transition:all .25s;
+  box-shadow:0 2px 8px rgba(124,58,237,.12)}
+.step-node:hover,.step-node.on{background:linear-gradient(135deg,#7C3AED,var(--pk));
+  color:#fff;border-color:transparent;box-shadow:0 4px 16px rgba(124,58,237,.4);transform:scale(1.04)}
+.step-arrow{color:#94A3B8;font-size:18px;font-weight:700}
+.step-info-box{background:#fff;border:2px solid #7C3AED;border-radius:var(--r);
+  padding:14px 16px;margin-top:14px;font-size:14px;line-height:1.7;
+  display:none;animation:slideDown .2s}
+.step-info-box.show{display:block}
+/* Simulation */
+.sim-box{background:linear-gradient(135deg,#0F172A,#1E1B4B);border-radius:var(--r-lg);
+  padding:22px;text-align:center;color:#fff;margin:18px 0;border:1px solid rgba(124,58,237,.3)}
+.sim-ctrls{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:14px;align-items:center}
+.sim-grp{display:flex;flex-direction:column;align-items:center;gap:5px}
+.sim-lbl{font-size:11px;color:rgba(255,255,255,.6);font-weight:700;text-transform:uppercase;letter-spacing:.3px}
+.sim-result{margin-top:14px;background:rgba(255,255,255,.08);border-radius:var(--r);padding:12px;font-size:14px;font-family:var(--font)}
+/* Hotspot */
+.hs-area{background:linear-gradient(135deg,#7F1D1D,#991B1B,#B91C1C);border-radius:var(--r-lg);
+  padding:18px;margin:18px 0;font-family:var(--font)}
+.hs-layer{border-radius:var(--r);padding:11px 16px;font-size:13px;font-weight:600;
+  color:#fff;cursor:pointer;display:flex;align-items:center;gap:10px;
+  margin-bottom:7px;transition:all .2s}
+.hs-layer:hover{transform:translateX(6px);filter:brightness(1.15)}
+.hs-info{background:rgba(0,0,0,.75);color:#fff;border-radius:var(--r);
+  padding:12px 16px;margin-top:10px;font-size:13px;line-height:1.7;display:none;animation:slideDown .2s}
+.hs-info.show{display:block}
+/* Animation */
+.anim-box{background:#FFFBEB;border:2px solid #FCD34D;border-radius:var(--r-lg);padding:18px;margin:18px 0;font-family:var(--font)}
+.anim-step{display:flex;align-items:flex-start;gap:12px;padding:10px 14px;background:#fff;
+  border-radius:var(--r);border:2px solid #E2E8F0;margin-bottom:8px;opacity:.4;transition:all .5s}
+.anim-step.active{opacity:1;border-color:#FCD34D;background:#FFFDE7}
+.anim-num{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#F59E0B,#F97316);
+  color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0}
+/* Quiz */
+.quiz-box{background:#fff;border:2px solid #E2E8F0;border-radius:var(--r-lg);
+  padding:20px;margin:18px 0;font-family:var(--font)}
+.quiz-q{font-size:16px;font-weight:700;color:#0C0F1A;margin-bottom:16px;line-height:1.5}
+.qopt{display:flex;align-items:center;gap:11px;padding:12px 16px;border:2px solid #E2E8F0;
+  border-radius:var(--r);margin-bottom:9px;cursor:pointer;font-size:14px;
+  font-weight:500;color:#334155;transition:all .18s}
+.qopt:hover:not(.locked){border-color:#7C3AED;background:#F5F3FF;color:#6D28D9}
+.qopt.correct{border-color:#10B981!important;background:#ECFDF5!important;color:#059669!important}
+.qopt.wrong{border-color:#EF4444!important;background:#FEF2F2!important;color:#DC2626!important}
+.qbubble{width:26px;height:26px;border-radius:50%;border:2px solid currentColor;
+  display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0}
+.quiz-fb{display:none;margin-top:12px;padding:13px 16px;border-radius:var(--r);font-size:14px;line-height:1.7}
+.quiz-fb.show{display:block;animation:slideDown .2s}
+/* Mindmap */
+.mindmap{background:linear-gradient(135deg,#F5F3FF,#EFF6FF);border-radius:var(--r-lg);
+  padding:18px;text-align:center;margin:18px 0;border:1.5px solid #DDD6FE;font-family:var(--font)}
+.mm-center{background:linear-gradient(135deg,var(--pu),var(--pk));color:#fff;border-radius:25px;
+  padding:10px 26px;font-size:16px;font-weight:800;display:inline-block;margin-bottom:16px;
+  box-shadow:0 4px 16px rgba(124,58,237,.4)}
+.mm-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;max-width:440px;margin:0 auto}
+.mm-node{background:#fff;border:2px solid #7C3AED;border-radius:var(--r);padding:10px 14px;
+  font-size:13px;color:#7C3AED;font-weight:700;cursor:pointer;transition:all .22s;
+  box-shadow:0 2px 8px rgba(124,58,237,.1)}
+.mm-node:hover{background:linear-gradient(135deg,#7C3AED,var(--pk));color:#fff;border-color:transparent;transform:scale(1.04)}
+/* Performance */
+.perf-box{background:linear-gradient(135deg,#ECFDF5,#F0FDF4);border-radius:var(--r-lg);
+  padding:18px;margin:18px 0;border:1.5px solid #A7F3D0;font-family:var(--font)}
+.perf-row{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.perf-lbl{width:105px;font-size:13px;color:#374151;flex-shrink:0;font-weight:600}
+.perf-track{flex:1;height:8px;background:rgba(0,0,0,.07);border-radius:4px;overflow:hidden}
+.perf-bar{height:100%;border-radius:4px}
+/* Page nav */
+.page-nav{background:#fff;border-top:2px solid #E2E8F0;padding:12px 22px;
+  display:flex;align-items:center;justify-content:space-between;flex-shrink:0;font-family:var(--font)}
+.pnav-btn{padding:10px 24px;border-radius:var(--r);border:2px solid var(--pu);
+  background:#fff;color:var(--pu);font-size:14px;font-weight:800;cursor:pointer;transition:all .22s}
+.pnav-btn:hover{background:linear-gradient(135deg,var(--pu),var(--pk));color:#fff;border-color:transparent;box-shadow:0 4px 16px rgba(124,58,237,.35)}
+.pnav-mid{font-size:13px;color:#94A3B8;font-weight:600}
+/* Right panels */
+.r-panel{width:0;background:#fff;border-left:1px solid #E2E8F0;overflow:hidden;
+  flex-shrink:0;display:flex;flex-direction:column;transition:width .25s}
+.r-panel.open{width:290px}
+.rp-hd{padding:14px 18px;border-bottom:1px solid #E2E8F0;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;background:#FAFBFF}
+.rp-title{font-size:15px;font-weight:800;color:#0C0F1A;font-family:var(--font)}
+.rp-close{background:none;border:none;cursor:pointer;font-size:18px;color:#94A3B8;
+  width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.rp-close:hover{background:#FFF5F7;color:var(--pk)}
+.rp-body{flex:1;overflow-y:auto;padding:16px;font-family:var(--font)}
+/* settings */
+.setting-lbl{font-size:11px;font-weight:800;color:#94A3B8;text-transform:uppercase;
+  letter-spacing:.6px;display:block;margin-bottom:10px;margin-top:16px}
+.setting-lbl:first-child{margin-top:0}
+.fs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.fs-opt{padding:10px;border:2px solid #E2E8F0;border-radius:var(--r);
+  text-align:center;cursor:pointer;transition:all .2s;background:#fff;color:#475569}
+.fs-opt:hover,.fs-opt.on{border-color:var(--pk);background:#FFF5F7;color:var(--pk)}
+.ff-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.ff-opt{padding:10px;border:2px solid #E2E8F0;border-radius:var(--r);text-align:center;cursor:pointer;background:#fff;color:#475569;transition:all .2s}
+.ff-opt:hover,.ff-opt.on{border-color:var(--pu);background:#F5F3FF;color:var(--pu)}
+.a11y-row{display:flex;align-items:center;gap:10px;padding:10px 0;
+  border-bottom:1px solid #F1F5F9;font-size:13px;color:#374151}
+.a11y-row span{flex:1}
+.tog{width:42px;height:23px;background:#E2E8F0;border-radius:12px;cursor:pointer;
+  position:relative;transition:background .2s;flex-shrink:0}
+.tog.on{background:linear-gradient(135deg,var(--pk),var(--pu))}
+.tog-k{width:19px;height:19px;background:#fff;border-radius:50%;position:absolute;
+  top:2px;left:2px;transition:left .2s;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.tog.on .tog-k{left:21px}
+.theme-dots{display:flex;gap:10px;margin-top:4px}
+.theme-dot{width:36px;height:36px;border-radius:10px;cursor:pointer;border:2px solid #E2E8F0;transition:all .2s}
+.theme-dot:hover,.theme-dot.on{border-color:var(--pk);transform:scale(1.1)}
+/* Study panel */
+.note-ta{width:100%;padding:12px;border:2px solid #E2E8F0;border-radius:var(--r);
+  font-size:14px;color:#334155;resize:vertical;min-height:100px;outline:none;
+  font-family:var(--font-book);background:#FAFBFF;line-height:1.7}
+.note-ta:focus{border-color:var(--pk);box-shadow:0 0 0 3px rgba(255,77,109,.1)}
+.bkmk-item{padding:9px 0;border-bottom:1px solid #F1F5F9;font-size:13px;
+  color:#475569;display:flex;align-items:center;gap:8px;cursor:pointer}
+.bkmk-item:hover{color:var(--pk)}
+.hl-item{display:flex;align-items:flex-start;gap:9px;padding:8px 0;border-bottom:1px solid #F1F5F9;font-size:13px;color:#475569}
+/* Play bar */
+.play-bar{height:54px;background:var(--navy2);border-top:1px solid rgba(255,255,255,.07);
+  display:flex;align-items:center;padding:0 20px;gap:14px;flex-shrink:0;cursor:pointer;
+  font-family:var(--font)}
+.play-bar::before{content:'';position:absolute;top:0;left:0;right:0;height:1.5px;
+  background:linear-gradient(90deg,var(--pk),var(--pu),var(--tl));opacity:.6}
+.pb-btn{width:36px;height:36px;background:linear-gradient(135deg,var(--pk),var(--pu));
+  border-radius:50%;border:none;cursor:pointer;color:#fff;font-size:13px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  box-shadow:0 2px 10px rgba(255,77,109,.4)}
+.pb-label{font-size:13px;font-weight:600;color:var(--t2);max-width:180px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pb-track{flex:1;height:4px;background:rgba(255,255,255,.12);border-radius:2px;cursor:pointer;overflow:hidden}
+.pb-fill{height:100%;background:linear-gradient(90deg,var(--pk),var(--pu));border-radius:2px}
+.pb-time{font-size:12px;color:var(--t3);font-weight:700}
+/* Captions */
+.captions{background:rgba(12,15,26,.92);backdrop-filter:blur(8px);color:#fff;
+  padding:10px 24px;text-align:center;font-size:14px;display:none;flex-shrink:0;
+  line-height:1.6;font-family:var(--font);border-top:1px solid rgba(255,255,255,.06)}
+.captions.show{display:block}
+/* Selection toolbar */
+.sel-toolbar{position:fixed;background:var(--navy2);backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:5px 7px;
+  display:none;gap:2px;z-index:1000;box-shadow:var(--shadow-lg);align-items:center;
+  animation:selPop .15s cubic-bezier(.34,1.56,.64,1)}
+@keyframes selPop{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+.sel-toolbar.show{display:flex}
+.st-btn{display:flex;align-items:center;gap:5px;padding:7px 11px;border-radius:9px;
+  border:none;background:transparent;color:var(--t2);font-size:12px;font-weight:700;
+  cursor:pointer;white-space:nowrap;transition:background .12s}
+.st-btn:hover{background:rgba(255,77,109,.2);color:var(--pk)}
+.st-sep{width:1px;height:20px;background:rgba(255,255,255,.1)}
+/* ESC hint */
+.esc-hint{position:fixed;bottom:72px;left:50%;transform:translateX(-50%);
+  background:rgba(12,15,26,.88);backdrop-filter:blur(10px);color:#fff;
+  padding:9px 20px;border-radius:30px;font-size:13px;display:none;z-index:500;
+  font-family:var(--font);border:1px solid rgba(255,255,255,.1);align-items:center;gap:10px}
+.esc-hint.show{display:flex}
+.esc-key{background:rgba(255,255,255,.15);border-radius:6px;padding:2px 9px;font-size:12px;font-weight:800}
+/* Bilingual split */
+.bi-wrap{display:flex;flex:1;overflow:hidden}
+.bi-pane{flex:1;overflow-y:auto;display:flex;flex-direction:column}
+.bi-pane:first-child{border-right:1px solid #E2E8F0}
+.bi-hd{background:#fff;border-bottom:1px solid #E2E8F0;padding:10px 18px;
+  display:flex;align-items:center;gap:9px;flex-shrink:0;position:sticky;top:0;z-index:10}
+.bi-badge{padding:4px 13px;border-radius:20px;font-size:12px;font-weight:800;font-family:var(--font)}
+.bi-ta{background:#FFF7ED;color:#EA580C}
+.bi-en{background:linear-gradient(135deg,rgba(255,77,109,.15),rgba(124,58,237,.15));color:#7C3AED}
+.bi-audio{width:30px;height:30px;background:#F1F5F9;border:1px solid #E2E8F0;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:13px;margin-left:auto}
+.bi-audio:hover{background:#FFF5F7;border-color:var(--pk)}
+.bi-divider{width:2px;background:#E2E8F0;flex-shrink:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:12px}
+.bi-ctrl{width:36px;height:36px;background:#fff;border:1.5px solid #E2E8F0;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;
+  color:#64748B;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.bi-ctrl:hover{border-color:var(--pk);color:var(--pk);background:#FFF5F7}
+/* Test */
+.test-wrap{display:flex;flex:1;overflow:hidden}
+.test-book{flex:1;overflow-y:auto;border-right:1px solid #E2E8F0}
+.test-panel{flex:1;overflow-y:auto;background:#F8F9FF}
+.test-hd{background:linear-gradient(135deg,var(--pk),var(--pu));color:#fff;
+  padding:13px 22px;font-size:14px;font-weight:800;display:flex;
+  align-items:center;justify-content:space-between;font-family:var(--font)}
+/* User highlights */
+.uhl-y{background:#FEF08A;border-radius:3px}
+.uhl-g{background:#BBF7D0;border-radius:3px}
+.uhl-b{background:#BAE6FD;border-radius:3px}
+.uhl-p{background:#E9D5FF;border-radius:3px}
+/* Offline bar */
+.offline-bar{background:linear-gradient(135deg,var(--amber),#F97316);color:#fff;
+  text-align:center;padding:7px;font-size:13px;font-weight:700;display:none;flex-shrink:0}
+.offline-bar.show{display:block}
+/* Responsive */
+@media(max-width:768px){
+  .r-index:not(.closed){position:absolute;z-index:100;height:100%;box-shadow:4px 0 30px rgba(0,0,0,.5)}
+  .r-panel.open{position:absolute;right:0;top:0;height:100%;z-index:100}
+  .hero-art{display:none}
+  .rn-logo{display:none}
+  .lb-grid{grid-template-columns:1fr}
+  .books-scroll{gap:16px}
+  .book-card{min-width:180px;max-width:180px}
+  .dash-inner{padding:20px 16px}
+}
+</style>
+</head>
+<body>
+<div id="app" style="height:100vh;overflow:hidden">
+
+<div class="toast" id="toast"></div>
+<div class="sel-toolbar" id="selToolbar">
+  <button class="st-btn" onclick="stNote()">📝 Notes</button>
+  <button class="st-btn" onclick="stHL()">🖊 Highlight</button>
+  <span class="st-sep"></span>
+  <button class="st-btn" onclick="stMeaning()">📖 Meaning</button>
+  <span class="st-sep"></span>
+  <button class="st-btn" onclick="stAudio()">🔊 Listen</button>
+  <span class="st-sep"></span>
+  <button class="st-btn" onclick="stTranslate()">🌐 Translate</button>
+  <button class="st-btn" onclick="stClarify()">💬 Clarify</button>
+  <span class="st-sep"></span>
+  <button class="st-btn" onclick="stSearch()">🤖 AI Search</button>
+  <button class="st-btn" onclick="hideSelBar()">✕</button>
+</div>
+
+<!-- ══════════ LOGIN ══════════ -->
+<div class="pg on" id="pgLogin">
+  <!-- Floating particles -->
+  <div class="particle" style="width:6px;height:6px;background:rgba(255,77,109,.6);left:15%;animation-duration:12s;animation-delay:0s"></div>
+  <div class="particle" style="width:4px;height:4px;background:rgba(124,58,237,.7);left:30%;animation-duration:9s;animation-delay:2s"></div>
+  <div class="particle" style="width:8px;height:8px;background:rgba(245,158,11,.5);left:55%;animation-duration:14s;animation-delay:1s"></div>
+  <div class="particle" style="width:5px;height:5px;background:rgba(16,185,129,.6);left:70%;animation-duration:11s;animation-delay:3s"></div>
+  <div class="particle" style="width:4px;height:4px;background:rgba(14,165,233,.7);left:85%;animation-duration:10s;animation-delay:.5s"></div>
+  <div class="login-card">
+    <!-- Brand -->
+    <div class="login-brand">
+      <div class="lb-orb1"></div>
+      <div class="lb-orb2"></div>
+      <div style="position:relative;z-index:1">
+        <div class="lb-logo">
+          <div class="lb-icon">📚</div>
+          <div>
+            <div class="lb-brand-name">SCERT DigiBook</div>
+            <div class="lb-brand-sub">TAMIL NADU · OFFICIAL</div>
+          </div>
+        </div>
+        <div class="lb-headline">Learn.<br/><span class="hl">Explore.</span><br/>Grow.</div>
+        <div class="lb-desc">Tamil Nadu's official interactive digital book platform — bringing SCERT textbooks to life with audio, animations, and smart learning tools.</div>
+      </div>
+      <div class="lb-stats">
+        <div class="lb-stat"><div class="lb-stat-n">50L+</div><div class="lb-stat-l">Students</div></div>
+        <div class="lb-stat"><div class="lb-stat-n">1–12</div><div class="lb-stat-l">All Classes</div></div>
+        <div class="lb-stat"><div class="lb-stat-n">100%</div><div class="lb-stat-l">SCERT Books</div></div>
+      </div>
+    </div>
+    <!-- Form -->
+    <div class="login-form">
+      <div class="lf-title">Welcome Back 👋</div>
+      <div class="lf-sub">Sign in to continue your learning journey</div>
+      <div class="role-tabs">
+        <button class="rtab on" onclick="setRole(this,'student')">🎒 Student</button>
+        <button class="rtab" onclick="setRole(this,'teacher')">👨‍🏫 Teacher</button>
+        <button class="rtab" onclick="setRole(this,'parent')">👪 Parent</button>
+      </div>
+      <div class="student-note show" id="stuNote">
+        <div class="sn-title">📖 Students — No login needed!</div>
+        Read all books as guest. Enter your ID only if you want to save progress &amp; earn badges.
+      </div>
+      <div class="field" id="fUser">
+        <label class="field-label" id="fUserLbl">Student ID (Optional)</label>
+        <div class="field-wrap">
+          <span class="field-icon">👤</span>
+          <input class="field-inp" type="text" id="loginUser" placeholder="Enter your ID or leave blank"/>
+        </div>
+        <div class="field-hint">💡 <span id="fUserHint">You can skip this and read as guest</span></div>
+      </div>
+      <div class="field" id="fPwd" style="display:none">
+        <label class="field-label">Password</label>
+        <div class="field-wrap">
+          <span class="field-icon">🔒</span>
+          <input class="field-inp field-inp-pwd" type="password" id="loginPwd" placeholder="Enter your password"/>
+        </div>
+      </div>
+      <div class="forgot-row" id="fwRow" style="display:none">
+        <label class="chk-label"><input type="checkbox" checked/> Remember me</label>
+        <span class="forgot-link">Forgot password?</span>
+      </div>
+      <button class="btn-login" id="loginBtn" onclick="doLogin()">📖 Read as Guest →</button>
+      <div class="or-sep">or</div>
+      <button class="btn-sso" onclick="doLogin()">
+        <span style="font-size:18px">🏛️</span> SCERT Digital Books — Single Sign On
+      </button>
+      <div class="login-footer">Tamil Nadu Schools Digital Platform · Class 1 to 12</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ DASHBOARD ══════════ -->
+<div class="pg" id="pgDash" style="flex-direction:column">
+  <div class="topbar">
+    <div class="tb-logo">
+      <div class="tb-logo-icon">📚</div>
+      <div class="tb-logo-text">SCERT <span>DigiBook</span></div>
+    </div>
+    <div class="tb-search">
+      <span class="tb-search-icon">🔍</span>
+      <input type="text" placeholder="Search book, topic, chapter..." oninput="onSearch(this.value)"/>
+    </div>
+    <div class="tb-right">
+      <div class="tb-chip" onclick="toggleMenu('gradeMenu')" id="gradeChip">
+        <span id="gradeLabel">6th</span>
+        <span class="tb-chip-arrow">▾</span>
+        <div class="drop-menu" id="gradeMenu">
+          <div class="dm-item on" onclick="setGrade(this,'6th')">6th Standard</div>
+          <div class="dm-item" onclick="setGrade(this,'7th')">7th Standard</div>
+          <div class="dm-item" onclick="setGrade(this,'8th')">8th Standard</div>
+          <div class="dm-item" onclick="setGrade(this,'9th')">9th Standard</div>
+          <div class="dm-item" onclick="setGrade(this,'10th')">10th Standard</div>
+          <div class="dm-item" onclick="setGrade(this,'11th')">11th Standard</div>
+          <div class="dm-item" onclick="setGrade(this,'12th')">12th Standard</div>
+        </div>
+      </div>
+      <div class="lang-drop">
+        <div class="tb-chip" onclick="toggleMenu('langMenu')">
+          <span id="langFlag">🇬🇧</span><span id="langLabel">English</span><span class="tb-chip-arrow">▾</span>
+        </div>
+        <div class="lang-menu" id="langMenu">
+          <div class="lm-item on" onclick="setLang(this,'English','🇬🇧')"><span class="lm-flag">🇬🇧</span>English</div>
+          <div class="lm-item" onclick="setLang(this,'தமிழ்','🔴')"><span class="lm-flag">🔴</span>தமிழ் (Tamil)</div>
+          <div class="lm-item" onclick="activateBilingual()"><span class="lm-flag">⚖️</span>Bilingual View</div>
+        </div>
+      </div>
+      <div class="acct-pill" onclick="toggleMenu('acctMenu')">
+        <div class="acct-av" id="acctAv">JS</div>
+        <div><div class="acct-name" id="acctName">Jeevitha</div><div class="acct-role" id="acctRole">Student</div></div>
+        <span style="font-size:10px;color:rgba(255,255,255,.4);margin-left:4px">▾</span>
+        <div class="drop-menu" id="acctMenu" style="right:0;left:auto;min-width:180px">
+          <div class="dm-item" onclick="showT('👤 My Profile')">👤 My Profile</div>
+          <div class="dm-item" onclick="showT('📊 Opening Progress...')">📊 My Progress</div>
+          <div class="dm-item" onclick="showT('🏆 Achievements loaded!')">🏆 Achievements</div>
+          <div style="height:1px;background:rgba(255,255,255,.07);margin:4px 0"></div>
+          <div class="dm-item" onclick="showPg('pgLogin')">🚪 Sign Out</div>
+        </div>
+      </div>
+      <div class="a11y-btn" onclick="openPanel('panelSettings')" title="Accessibility">♿</div>
+    </div>
+  </div>
+  <div class="scrollbody" style="flex:1;overflow-y:auto;background:var(--navy)">
+    <div class="dash-inner">
+      <!-- HERO -->
+      <div class="hero">
+        <div class="hero-bg"></div><div class="hero-mesh"></div>
+        <div class="hero-grid"></div><div class="hero-glow"></div>
+        <div class="hero-content">
+          <div class="hero-greeting"><span></span>WELCOME BACK</div>
+          <div class="hero-name" id="heroName">Jeevitha! 🌟</div>
+          <div class="hero-badge" id="heroBadge">🏆 &nbsp;6,584 Points &nbsp;·&nbsp; Level 3</div>
+          <div class="hero-sub">Keep learning &amp; boost your score to climb the leaderboard 🔥</div>
+          <div class="hero-btns">
+            <button class="hbtn-p" onclick="showPg('pgReader')">▶ Continue Learning</button>
+            <button class="hbtn-s" onclick="showT('Loading pending tasks...')">View Pending Tasks</button>
+          </div>
+        </div>
+        <div class="hero-art">
+          <div class="h-star" style="top:0;left:50px;animation-delay:0s">✦</div>
+          <div class="h-star" style="top:15px;right:15px;font-size:12px;animation-delay:.8s">✦</div>
+          <div class="h-star" style="bottom:40px;left:30px;font-size:13px;animation-delay:1.5s">⋆</div>
+          <div class="h-globe">🌍</div>
+          <div class="h-kid" style="right:118px;bottom:10px;animation-delay:.6s;font-size:68px">👧</div>
+          <div class="h-kid" style="right:55px;bottom:4px;animation-delay:1.2s;font-size:62px">👦</div>
+          <div class="h-kid" style="right:0;bottom:14px;animation-delay:1.8s;font-size:58px">🧑</div>
+        </div>
+      </div>
+      <!-- CLASS BOOKS -->
+      <div style="margin-bottom:40px">
+        <div class="sec-row">
+          <div>
+            <div class="sec-label">12TH — TERM I</div>
+            <div class="sec-title">Class Books <em>(English)</em> <span style="cursor:pointer;font-size:17px" onclick="showT('Edit medium...')">✏️</span></div>
+          </div>
+          <a class="sec-link" onclick="showPg('pgClassSelect')">Check Other Classes →</a>
+        </div>
+        <div class="tag-row">
+          <div class="tag-chip" onclick="showT('Change term...')">Term I ✏️</div>
+          <div class="tag-chip" onclick="showT('Change medium...')">English Medium ✏️</div>
+        </div>
+        <div class="books-scroll">
+          <div class="book-card" onclick="showPg('pgChapter')">
+            <div class="book-cover" style="background:linear-gradient(160deg,#1D4ED8,#2563EB,#60A5FA)">
+              <div class="book-icon">🔬</div>
+              <div class="book-subj-label">Science</div>
+              <div class="book-prog active">38%</div>
+            </div>
+            <div class="book-shine"></div>
+            <div class="book-info">
+              <div class="book-title">Science</div>
+              <div class="book-pages">📄 268 Pages</div>
+              <div class="book-pbar-wrap"><div class="book-pbar" style="width:38%;background:linear-gradient(90deg,#60A5FA,#3B82F6)"></div></div>
+              <button class="book-btn cont" onclick="event.stopPropagation();showPg('pgReader')">▶ Continue</button>
+            </div>
+          </div>
+          <div class="book-card" onclick="showPg('pgChapter')">
+            <div class="book-cover" style="background:linear-gradient(160deg,#15803D,#16A34A,#4ADE80)">
+              <div class="book-icon">📐</div>
+              <div class="book-subj-label">Mathematics</div>
+              <div class="book-prog">10%</div>
+            </div>
+            <div class="book-shine"></div>
+            <div class="book-info">
+              <div class="book-title">Mathematics</div>
+              <div class="book-pages">📄 268 Pages</div>
+              <div class="book-pbar-wrap"><div class="book-pbar" style="width:10%;background:linear-gradient(90deg,#4ADE80,#22C55E)"></div></div>
+              <button class="book-btn start">Start Reading</button>
+            </div>
+          </div>
+          <div class="book-card" onclick="showPg('pgChapter')">
+            <div class="book-cover" style="background:linear-gradient(160deg,#B91C1C,#DC2626,#F87171)">
+              <div class="book-icon">🌍</div>
+              <div class="book-subj-label">Social Science</div>
+              <div class="book-prog">1%</div>
+            </div>
+            <div class="book-shine"></div>
+            <div class="book-info">
+              <div class="book-title">Social Science</div>
+              <div class="book-pages">📄 268 Pages</div>
+              <div class="book-pbar-wrap"><div class="book-pbar" style="width:1%;background:linear-gradient(90deg,#F87171,#EF4444)"></div></div>
+              <button class="book-btn start">Start Reading</button>
+            </div>
+          </div>
+          <div class="book-card" onclick="showPg('pgChapter')">
+            <div class="book-cover" style="background:linear-gradient(160deg,#5B21B6,#7C3AED,#A78BFA)">
+              <div class="book-icon">📖</div>
+              <div class="book-subj-label">Tamil</div>
+              <div class="book-prog">0%</div>
+            </div>
+            <div class="book-shine"></div>
+            <div class="book-info">
+              <div class="book-title">Tamil</div>
+              <div class="book-pages">📄 268 Pages</div>
+              <div class="book-pbar-wrap"><div class="book-pbar" style="width:0%;background:linear-gradient(90deg,#A78BFA,#8B5CF6)"></div></div>
+              <button class="book-btn start">Start Reading</button>
+            </div>
+          </div>
+          <div class="book-card" onclick="showPg('pgChapter')">
+            <div class="book-cover" style="background:linear-gradient(160deg,#92400E,#D97706,#FCD34D)">
+              <div class="book-icon">✍️</div>
+              <div class="book-subj-label">English</div>
+              <div class="book-prog">0%</div>
+            </div>
+            <div class="book-shine"></div>
+            <div class="book-info">
+              <div class="book-title">English</div>
+              <div class="book-pages">📄 268 Pages</div>
+              <div class="book-pbar-wrap"><div class="book-pbar" style="width:0%;background:linear-gradient(90deg,#FCD34D,#F59E0B)"></div></div>
+              <button class="book-btn start">Start Reading</button>
+            </div>
+          </div>
+          <div class="book-card" onclick="showPg('pgChapter')">
+            <div class="book-cover" style="background:linear-gradient(160deg,#0E7490,#0891B2,#67E8F9)">
+              <div class="book-icon">🎨</div>
+              <div class="book-subj-label">Art Education</div>
+              <div class="book-prog">0%</div>
+            </div>
+            <div class="book-shine"></div>
+            <div class="book-info">
+              <div class="book-title">Art Education</div>
+              <div class="book-pages">📄 180 Pages</div>
+              <div class="book-pbar-wrap"><div class="book-pbar" style="width:0%;background:linear-gradient(90deg,#67E8F9,#06B6D4)"></div></div>
+              <button class="book-btn start">Start Reading</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- LEADERBOARD -->
+      <div style="margin-bottom:32px">
+        <div class="sec-row">
+          <div><div class="sec-label">STATE LEVEL — 6TH</div><div class="sec-title">Leaderboard 🏆</div></div>
+          <a class="sec-link" onclick="showT('Loading full leaderboard...')">See All →</a>
+        </div>
+        <div class="lb-card">
+          <div class="lb-grid">
+            <div class="lb-col">
+              <div class="lb-item"><div class="lb-rank r1">1</div><div class="lb-av">👩</div><div class="lb-info"><div class="lb-name">Sadie Santiago</div><div class="lb-school">Govt. Hr. Sec. School, Madurai</div><div class="lb-score">684,445 Points</div></div></div>
+              <div class="lb-item"><div class="lb-rank rn">4</div><div class="lb-av">👩</div><div class="lb-info"><div class="lb-name">Marina Ferguson</div><div class="lb-school">Govt. Hr. Sec. School, Madurai</div><div class="lb-score">668,900 Points</div></div></div>
+            </div>
+            <div class="lb-col">
+              <div class="lb-item"><div class="lb-rank r2">2</div><div class="lb-av">👩</div><div class="lb-info"><div class="lb-name">Minnie Pacheco</div><div class="lb-school">Govt. Hr. Sec. School, Madurai</div><div class="lb-score">681,200 Points</div></div></div>
+              <div class="lb-item"><div class="lb-rank rn">5</div><div class="lb-av">👦</div><div class="lb-info"><div class="lb-name">Alvin Schultz</div><div class="lb-school">Govt. Hr. Sec. School, Madurai</div><div class="lb-score">655,300 Points</div></div></div>
+            </div>
+            <div class="lb-col">
+              <div class="lb-item"><div class="lb-rank r3">3</div><div class="lb-av">👦</div><div class="lb-info"><div class="lb-name">Jeremiah Washington</div><div class="lb-school">Govt. Hr. Sec. School, Madurai</div><div class="lb-score">672,100 Points</div></div></div>
+              <div class="lb-item"><div class="lb-rank rn">6</div><div class="lb-av">👦</div><div class="lb-info"><div class="lb-name">Lloyd Delgado</div><div class="lb-school">Govt. Hr. Sec. School, Madurai</div><div class="lb-score">648,000 Points</div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ CLASS SELECT ══════════ -->
+<div class="pg" id="pgClassSelect" style="flex-direction:column">
+  <div class="topbar">
+    <button onclick="goBack()" style="background:none;border:none;color:var(--t2);font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;padding:0 14px;height:100%;border-right:1px solid rgba(255,255,255,.07)">← Back</button>
+    <span style="font-size:16px;font-weight:800;color:#fff;padding:0 16px">Choose Your Class</span>
+  </div>
+  <div class="page-bg"><div class="page-inner">
+    <div class="tag-row" style="margin-bottom:20px">
+      <div class="tag-chip">English Medium ✏️</div>
+      <div class="tag-chip">Term I ✏️</div>
+    </div>
+    <div class="class-grid-pg">
+      <div class="cls-card sel" onclick="selClass(this,'6th')"><div class="cls-cover" style="background:linear-gradient(135deg,rgba(255,77,109,.2),rgba(124,58,237,.2));color:#FF4D6D">6</div><div class="cls-lbl">6th Std</div></div>
+      <div class="cls-card" onclick="selClass(this,'7th')"><div class="cls-cover" style="background:rgba(124,58,237,.1);color:#A855F7">7</div><div class="cls-lbl">7th Std</div></div>
+      <div class="cls-card" onclick="selClass(this,'8th')"><div class="cls-cover" style="background:rgba(14,165,233,.1);color:#38BDF8">8</div><div class="cls-lbl">8th Std</div></div>
+      <div class="cls-card" onclick="selClass(this,'9th')"><div class="cls-cover" style="background:rgba(16,185,129,.1);color:#34D399">9</div><div class="cls-lbl">9th Std</div></div>
+      <div class="cls-card" onclick="selClass(this,'10th')"><div class="cls-cover" style="background:rgba(245,158,11,.1);color:#FBBF24">10</div><div class="cls-lbl">10th Std</div></div>
+      <div class="cls-card" onclick="selClass(this,'11th')"><div class="cls-cover" style="background:rgba(239,68,68,.1);color:#F87171">11</div><div class="cls-lbl">11th Std</div></div>
+      <div class="cls-card" onclick="selClass(this,'12th')"><div class="cls-cover" style="background:rgba(255,77,109,.1);color:#FF4D6D">12</div><div class="cls-lbl">12th Std</div></div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ══════════ CHAPTER ══════════ -->
+<div class="pg" id="pgChapter" style="flex-direction:column">
+  <div class="topbar">
+    <button onclick="goBack()" style="background:none;border:none;color:var(--t2);font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;padding:0 14px;height:100%;border-right:1px solid rgba(255,255,255,.07)">← Back</button>
+    <span style="font-size:16px;font-weight:800;color:#fff;padding:0 16px">Science — 6th Standard</span>
+  </div>
+  <div class="breadcrumb">
+    <span class="bc" onclick="showPg('pgDash')">Home</span><span class="bc-sep">›</span>
+    <span class="bc" onclick="showPg('pgDash')">Class 6</span><span class="bc-sep">›</span>
+    <span class="bc cur">Science</span>
+  </div>
+  <div class="page-bg"><div class="page-inner">
+    <div class="sec-label" style="margin-bottom:12px">SELECT A CHAPTER</div>
+    <div class="ch-grid" style="margin-bottom:28px">
+      <div class="ch-card sel" onclick="showPg('pgReader')"><div class="ch-cover" style="background:linear-gradient(135deg,rgba(255,77,109,.15),rgba(124,58,237,.15))"><span style="font-size:38px">🔬</span><div class="ch-prog">38%</div></div><div class="ch-info"><div class="ch-name">Chapter 1 — The Wonderful World of Science</div><div class="ch-sub">3 sessions</div></div></div>
+      <div class="ch-card" onclick="showPg('pgReader')"><div class="ch-cover" style="background:linear-gradient(135deg,rgba(16,185,129,.12),rgba(14,165,233,.12))"><span style="font-size:38px">🌿</span><div class="ch-prog">6%</div></div><div class="ch-info"><div class="ch-name">Chapter 2 — Diversity in the Living World</div><div class="ch-sub">3 sessions</div></div></div>
+      <div class="ch-card" onclick="showPg('pgReader')"><div class="ch-cover" style="background:linear-gradient(135deg,rgba(245,158,11,.12),rgba(249,115,22,.12))"><span style="font-size:38px">🥗</span></div><div class="ch-info"><div class="ch-name">Chapter 3 — Mindful Eating</div><div class="ch-sub">2 sessions</div></div></div>
+      <div class="ch-card" onclick="showPg('pgReader')"><div class="ch-cover" style="background:linear-gradient(135deg,rgba(239,68,68,.12),rgba(220,38,38,.12))"><span style="font-size:38px">🧲</span></div><div class="ch-info"><div class="ch-name">Chapter 4 — Exploring Magnets</div><div class="ch-sub">2 sessions</div></div></div>
+      <div class="ch-card" onclick="showPg('pgReader')"><div class="ch-cover" style="background:linear-gradient(135deg,rgba(14,165,233,.12),rgba(6,182,212,.12))"><span style="font-size:38px">🌳</span></div><div class="ch-info"><div class="ch-name">Chapter 5 — Nature's Treasures</div><div class="ch-sub">3 sessions</div></div></div>
+    </div>
+    <div class="sec-label" style="margin-bottom:12px">SESSIONS — Chapter 1</div>
+    <div class="sess-list">
+      <div class="sess-item" onclick="showPg('pgReader')">
+        <div class="sess-dot active"></div>
+        <div style="flex:1"><div class="sess-title">Session 1 — Introduction to Science</div><div class="sess-sub">38% complete · Last opened today</div></div>
+        <span class="pill pill-pk" style="margin-right:10px">38%</span>
+        <button class="sess-btn cont" onclick="event.stopPropagation();showPg('pgReader')">Continue</button>
+      </div>
+      <div class="sess-item" onclick="showPg('pgReader')">
+        <div class="sess-dot"></div>
+        <div style="flex:1"><div class="sess-title">Session 2 — Methods of Science</div><div class="sess-sub">Not started</div></div>
+        <button class="sess-btn start" onclick="event.stopPropagation();showPg('pgReader')">Start</button>
+      </div>
+      <div class="sess-item" onclick="showPg('pgReader')">
+        <div class="sess-dot"></div>
+        <div style="flex:1"><div class="sess-title">Session 3 — Study Material</div><div class="sess-sub">Not started</div></div>
+        <button class="sess-btn start" onclick="event.stopPropagation();showPg('pgReader')">Start</button>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ══════════ READER ══════════ -->
+<div class="pg" id="pgReader">
+  <div class="offline-bar" id="offlineBar">📴 Offline Mode — Cached content available</div>
+  <div class="reader-nav" style="position:relative">
+    <div class="rn-logo">
+      <div class="rn-book-thumb">📚</div>
+      <div class="rn-book-meta">
+        <div class="rn-book-title">NCERT — English — Class 6</div>
+        <div class="rn-book-sub">Science · Chapter 1</div>
+      </div>
+    </div>
+    <button class="rn-back" onclick="goBack()">← Back</button>
+    <div class="rn-chapter">Chapter 1 - The Wonderful World of Science / Session 1</div>
+    <button class="rn-listen" id="listenBtn" onclick="toggleAudio()">▶ Listen Audio</button>
+    <div style="position:relative;margin-right:10px">
+      <div class="rn-lang" onclick="toggleMenu('rdLangMenu')">
+        <span id="rdLangFlag">🇬🇧</span> <span id="rdLangLabel">English</span> <span style="font-size:10px;color:var(--t4)">▾</span>
+      </div>
+      <div class="lang-menu" id="rdLangMenu">
+        <div class="lm-item on" onclick="setRdLang(this,'English','🇬🇧')"><span class="lm-flag">🇬🇧</span>English</div>
+        <div class="lm-item" onclick="setRdLang(this,'தமிழ்','🔴')"><span class="lm-flag">🔴</span>தமிழ் (Tamil)</div>
+        <div class="lm-item" onclick="activateBilingual()"><span class="lm-flag">⚖️</span>Bilingual View</div>
+      </div>
+    </div>
+    <div class="rn-av" id="rdAv">JS</div>
+  </div>
+  <!-- Toolbar -->
+  <div class="reader-toolbar">
+    <button class="rt-btn" title="Bookmark" id="tbBkmk" onclick="doBookmark()">🔖</button>
+    <button class="rt-btn" title="Highlight" id="tbHL" onclick="toggleHL()">🖊</button>
+    <button class="rt-btn" title="Word Meaning" id="tbWord" onclick="toggleWordBox()">📖</button>
+    <button class="rt-btn on" title="AI Assistant" onclick="showT('AI assistant ready!')">🤖</button>
+    <button class="rt-btn" title="Notes" onclick="openPanel('panelStudy')">📝</button>
+    <button class="rt-btn" title="Annotate" onclick="openPanel('panelStudy')">✏️</button>
+    <button class="rt-btn" title="3D View" id="tb3D" onclick="toggle3D()">🌐</button>
+    <button class="rt-btn" title="Settings" id="tbSettings" onclick="openPanel('panelSettings')">⚙️</button>
+    <button class="rt-btn" title="Share" onclick="showT('Share link copied!')">↗️</button>
+    <div class="rt-sep"></div>
+    <div class="rt-search-bar">
+      <span style="color:var(--t4);font-size:13px">🔍</span>
+      <input type="text" placeholder="Search keywords..."/>
+    </div>
+    <div style="margin-left:auto;display:flex;align-items:center;gap:6px">
+      <button class="rt-btn" onclick="toggleIndex()" title="Index">☰</button>
+      <select class="rt-session-sel" onchange="showT('Loading '+this.value+'...')">
+        <option>Session - 1</option>
+        <option>Session - 2</option>
+        <option>Session - 3</option>
+      </select>
+    </div>
+  </div>
+  <!-- Highlight bar -->
+  <div class="hl-bar" id="hlBar">
+    <span class="hl-lbl">Highlight:</span>
+    <div class="hl-dot" style="background:#FEF08A" onclick="applyHL('uhl-y')"></div>
+    <div class="hl-dot" style="background:#BBF7D0" onclick="applyHL('uhl-g')"></div>
+    <div class="hl-dot" style="background:#BAE6FD" onclick="applyHL('uhl-b')"></div>
+    <div class="hl-dot" style="background:#E9D5FF" onclick="applyHL('uhl-p')"></div>
+    <button class="hl-act" onclick="clearHL()">Clear All</button>
+    <button class="hl-act" onclick="toggleHL()">✕ Close</button>
+  </div>
+  <!-- Captions -->
+  <div class="captions" id="captionsBar">
+    📝 அறிவியல் என்பது இயற்கை உலகை அவதானிப்பு மூலம் புரிந்துகொள்வதாகும். / Science helps us understand the natural world through observation.
+  </div>
+  <!-- Body -->
+  <div class="reader-body">
+    <!-- Index -->
+    <div style="display:flex;flex-shrink:0">
+      <div class="r-index" id="indexPanel">
+        <div class="r-index-hd">
+          <div class="r-index-hd-title">Index</div>
+          <div class="r-index-acts">
+            <span class="r-index-act" onclick="showT('Expanded all')">Expand All</span>
+            <span class="r-index-act" onclick="showT('Collapsed all')">Collapse</span>
+          </div>
+        </div>
+        <div class="r-index-body">
+          <div class="toc-item" style="font-style:italic">Introduction</div>
+          <div class="toc-sec">Chapter 1 — Wonderful World <span class="toc-badge">21%</span></div>
+          <div class="toc-item on" onclick="scrollSec('s0')">Session - 1 <span class="toc-badge">38%</span></div>
+          <div class="toc-item" onclick="scrollSec('s1')">Session - 2 <span class="toc-badge done">0%</span></div>
+          <div class="toc-item" style="padding-left:28px;font-size:12px"><span class="toc-clarified">● Clarified (1)</span></div>
+          <div class="toc-item" onclick="scrollSec('s1')">Session - 3 Study Material <span class="toc-badge done">0%</span></div>
+          <div class="toc-sec">Chapter 2 — Diversity <span class="toc-badge">6%</span></div>
+          <div class="toc-item" onclick="scrollSec('s0')">Session - 1</div>
+          <div class="toc-item" onclick="scrollSec('s0')">Session - 2</div>
+          <div class="toc-sec">Chapter 3 — Mindful Eating</div>
+          <div class="toc-item" onclick="scrollSec('s0')">Session - 1</div>
+        </div>
+      </div>
+      <div class="idx-toggle" onclick="toggleIndex()" id="idxTab">☰</div>
+    </div>
+    <!-- Main + Panels -->
+    <div style="flex:1;display:flex;overflow:hidden;min-width:0">
+      <div class="r-main">
+        <div class="r-chapter-bar">
+          <span class="r-chapter-title">Chapter 1 - The Wonderful World of Science / Session 1</span>
+          <div class="r-chapter-nav">
+            <div class="r-nav-btn" onclick="showT('Previous page')">◀</div>
+            <div class="r-nav-btn" onclick="showT('Next page')">▶</div>
+            <div class="r-expand" onclick="showT('Full screen')">⤢</div>
+          </div>
+        </div>
+        <!-- NORMAL VIEW -->
+        <div id="normalView" style="flex:1;display:flex;flex-direction:column;overflow:hidden">
+          <div class="r-scroll" id="rScroll">
+            <div class="book-content" id="bookContent">
+              <div id="s0">
+                <div class="session-marker">
+                  <span class="sess-chip">Session 1 — Introduction</span>
+                  <div class="sess-actions">
+                    <button class="sess-act-btn" id="bkmkSessBtn" onclick="doBookmark()">🔖 Bookmark Session</button>
+                    <button class="sess-act-btn" id="audioToggleBtn" onclick="toggleAudioBox()">🔊 Listen Audio</button>
+                  </div>
+                </div>
+                <!-- Audio -->
+                <div id="audioBox" style="display:none">
+                  <div class="audio-box">
+                    <div class="audio-top">🎙️ Full Page Audio — SCERT Official Narration</div>
+                    <div class="audio-controls">
+                      <button class="play-btn" id="mainPlayBtn" onclick="togglePlay()">▶</button>
+                      <div class="a-track" onclick="seekAudio(event,this)"><div class="a-fill" id="audioFill" style="width:38%"></div></div>
+                      <div class="a-time" id="audioTime">1:24 / 3:47</div>
+                    </div>
+                    <div class="a-modes">
+                      <button class="a-mode on" onclick="setMode('Full Page',this)">📄 Full Page</button>
+                      <button class="a-mode" onclick="setMode('Line-by-Line',this)">📝 Line-by-Line</button>
+                      <button class="a-mode" onclick="setMode('Paragraph',this)">¶ Paragraph</button>
+                      <button class="a-mode" id="spdBtn" onclick="cycleSpd(this)">1.0×</button>
+                    </div>
+                  </div>
+                </div>
+                <h2>Chapter 1 — The Wonderful World of Science</h2>
+                <p>Have you ever <span class="word-hl" onclick="showWord('wondered','verb','To feel curiosity or wonder; to think about something with interest and amazement.','ஆச்சரியப்படுதல் — To be filled with wonder')">wondered</span> why the sky is blue, or why the stars twinkle at night? Have you ever watched a flower bloom and <span class="word-hl" onclick="showWord('marvelled','verb','To feel great surprise or admiration; to be struck with wonder.','வியந்தது — Deep astonishment')">marvelled</span> at how it knows when to open?</p>
+                <!-- Word box -->
+                <div id="wordBox" style="display:none">
+                  <div class="word-box">
+                    <div class="wb-word" id="wbWord">wondered</div>
+                    <div class="wb-pos" id="wbPos">VERB · ENGLISH</div>
+                    <div class="wb-def" id="wbDef">To feel curiosity or wonder; to think about something with interest and amazement.</div>
+                    <div class="wb-tamil" id="wbTamil">தமிழ்: <strong>ஆச்சரியப்படுதல்</strong></div>
+                    <div class="wb-btns">
+                      <button class="wb-btn" onclick="showT('🔊 Playing pronunciation...')">🔊 Pronounce</button>
+                      <button class="wb-btn" onclick="showT('📚 She wondered why the stars twinkle.')">📚 Example</button>
+                      <button class="wb-btn" onclick="showT('Synonyms: curious, amazed, astonished')">📖 Synonyms</button>
+                      <button class="wb-btn" style="border-color:#EF4444;color:#EF4444" onclick="document.getElementById('wordBox').style.display='none'">✕</button>
+                    </div>
+                  </div>
+                </div>
+                <p>These are just a few of the many <span class="word-hl" onclick="showWord('mysteries','noun','Things that are difficult or impossible to explain or understand fully.','மர்மங்கள் — Beyond ordinary explanation')">mysteries</span> that science helps us unravel. The most wonderful thing about science is that it is <strong>everywhere</strong> — from the depths of the ocean to the vastness of outer space, from what is cooking in the kitchen to what is happening on the playground.</p>
+                <p>Some of the most <span class="word-hl" onclick="showWord('groundbreaking','adjective','Revolutionary; introducing completely new ideas that change how we understand the world.','புரட்சிகரமான — Fundamentally changes our understanding')">groundbreaking</span> discoveries have often come from unexpected places — a falling apple, a bubbling kettle, a glowing sample of radium.</p>
+                <div class="callout callout-orange"><strong>💡 Did You Know?</strong> The word "science" comes from the Latin <em>scientia</em>, meaning <em>knowledge</em>. Science began when humans first started asking <em>why</em>!</div>
+                <!-- 3D Box -->
+                <div id="box3D" style="display:none">
+                  <div style="background:linear-gradient(135deg,#E8EAF6,#C5CAE9);border-radius:16px;padding:22px;text-align:center;border:2px dashed #7986CB;margin:18px 0;font-family:var(--font)">
+                    <div style="font-size:40px;margin-bottom:8px">🌐</div>
+                    <div style="font-size:17px;font-weight:800;color:#3F51B5">Earth's Layers — 3D Model</div>
+                    <div style="font-size:13px;color:#5C6BC0;margin-top:5px">Rotate · Zoom · Explore · Labels</div>
+                    <div style="display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap">
+                      <button style="padding:8px 20px;border-radius:20px;border:2px solid #5C6BC0;background:#fff;color:#3F51B5;font-size:13px;font-weight:700;cursor:pointer" onclick="showT('Loading 3D model...')">▶ Load 3D</button>
+                      <button style="padding:8px 20px;border-radius:20px;border:2px solid #5C6BC0;background:#fff;color:#3F51B5;font-size:13px;font-weight:700;cursor:pointer" onclick="showT('360° video playing...')">360° Video</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="s1" style="scroll-margin-top:10px">
+                <h2>1.1 What is Science?</h2>
+                <p>Science is a <strong>systematic way</strong> of understanding the natural world through <strong>observation</strong>, <strong>experimentation</strong>, and <strong>logical reasoning</strong>. It helps us explain phenomena around us.</p>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:20px 0">
+                  <div style="background:#EFF6FF;border:2px solid #BFDBFE;border-radius:14px;padding:16px;text-align:center"><div style="font-size:28px">🔍</div><div style="font-size:14px;font-weight:800;color:#1D4ED8;margin-top:7px">Observation</div><div style="font-size:12px;color:#64748B;margin-top:4px">Notice &amp; Record</div></div>
+                  <div style="background:#FFFBEB;border:2px solid #FDE68A;border-radius:14px;padding:16px;text-align:center"><div style="font-size:28px">🧪</div><div style="font-size:14px;font-weight:800;color:#D97706;margin-top:7px">Experimentation</div><div style="font-size:12px;color:#64748B;margin-top:4px">Test Your Ideas</div></div>
+                  <div style="background:#ECFDF5;border:2px solid #A7F3D0;border-radius:14px;padding:16px;text-align:center"><div style="font-size:28px">💭</div><div style="font-size:14px;font-weight:800;color:#059669;margin-top:7px">Reasoning</div><div style="font-size:12px;color:#64748B;margin-top:4px">Draw Conclusions</div></div>
+                </div>
+                <h2 style="scroll-margin-top:10px">1.2 The Scientific Method</h2>
+                <div class="diagram-box">
+                  <div style="font-size:14px;font-weight:700;color:#7C3AED;margin-bottom:6px">👆 Tap any step to explore</div>
+                  <div class="step-flow">
+                    <div class="step-node" onclick="showStep(0,this)">1. Observe 🔍</div>
+                    <div class="step-arrow">→</div>
+                    <div class="step-node" onclick="showStep(1,this)">2. Question ❓</div>
+                    <div class="step-arrow">→</div>
+                    <div class="step-node" onclick="showStep(2,this)">3. Hypothesize 💭</div>
+                    <div class="step-arrow">→</div>
+                    <div class="step-node" onclick="showStep(3,this)">4. Experiment 🧪</div>
+                    <div class="step-arrow">→</div>
+                    <div class="step-node" onclick="showStep(4,this)">5. Conclude 📊</div>
+                  </div>
+                  <div class="step-info-box" id="stepInfoBox"></div>
+                </div>
+                <!-- Hotspot -->
+                <h2>Layers of the Earth</h2>
+                <div class="hs-area">
+                  <div style="font-size:13px;color:rgba(255,255,255,.8);margin-bottom:12px;font-weight:600">🌍 Tap any layer to learn more</div>
+                  <div class="hs-layer" style="background:rgba(255,255,255,.08)" onclick="showHS(this,'🌍 Crust: The outermost layer, 5–70 km thick. Oceanic crust is thinner; continental crust can be 70 km. This is where we live!')">🟤 Crust — 5 to 70 km thick</div>
+                  <div class="hs-layer" style="background:rgba(255,100,0,.3)" onclick="showHS(this,'🔴 Mantle: Semi-solid rock layer. Convection currents here drive plate tectonics, causing earthquakes and volcanic eruptions!')">🔴 Mantle — Semi-solid rock</div>
+                  <div class="hs-layer" style="background:rgba(255,50,0,.4)" onclick="showHS(this,'🟠 Outer Core: Liquid iron &amp; nickel. Its movement generates Earth\'s magnetic field that protects us from solar winds!')">🟠 Outer Core — Liquid iron &amp; nickel</div>
+                  <div class="hs-layer" style="background:rgba(200,0,0,.5)" onclick="showHS(this,'🟡 Inner Core: Solid ball of iron &amp; nickel. Temperature ~5,500°C — as hot as the Sun\'s surface! Stays solid due to immense pressure.')">🟡 Inner Core — Solid, ~5,500°C</div>
+                  <div class="hs-info" id="hsInfo"></div>
+                </div>
+                <!-- Simulation -->
+                <h2>Interactive Simulation</h2>
+                <div class="sim-box">
+                  <div style="font-size:24px;margin-bottom:6px">⚗️</div>
+                  <div style="font-size:16px;font-weight:800;font-family:var(--font)">Pendulum — PhET Simulation</div>
+                  <div class="sim-ctrls">
+                    <div class="sim-grp"><div class="sim-lbl">Length (cm)</div><input type="range" min="10" max="100" value="50" id="simL" oninput="updateSim()" style="width:100px;cursor:pointer"/><span id="simLV" style="font-size:12px">50 cm</span></div>
+                    <div class="sim-grp"><div class="sim-lbl">Gravity (m/s²)</div><input type="range" min="1" max="25" value="10" id="simG" oninput="updateSim()" style="width:100px;cursor:pointer"/><span id="simGV" style="font-size:12px">10</span></div>
+                  </div>
+                  <div class="sim-result">T = <strong id="simT">1.42</strong>s &nbsp;|&nbsp; f = <strong id="simF">0.70</strong>Hz &nbsp;|&nbsp; <span id="simNote" style="color:rgba(255,255,255,.7);font-size:13px">Longer string → slower swing!</span></div>
+                  <div style="display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap">
+                    <button style="padding:8px 18px;border-radius:20px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);color:#fff;font-size:13px;font-weight:700;cursor:pointer" onclick="showT('Opening PhET...')">Open in PhET</button>
+                    <button style="padding:8px 18px;border-radius:20px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);color:#fff;font-size:13px;font-weight:700;cursor:pointer" onclick="showT('Opening GeoGebra...')">GeoGebra</button>
+                    <button style="padding:8px 18px;border-radius:20px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);color:#fff;font-size:13px;font-weight:700;cursor:pointer" onclick="showT('H5P loading...')">H5P Module</button>
+                  </div>
+                </div>
+                <!-- Animation -->
+                <h2>Animated Process — Photosynthesis</h2>
+                <div class="anim-box">
+                  <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap">
+                    <button style="padding:8px 20px;background:linear-gradient(135deg,#F59E0B,#F97316);border:none;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer;color:#fff;font-family:var(--font)" onclick="startAnim()">▶ Play Animation</button>
+                    <button style="padding:8px 20px;background:#fff;border:2px solid #E2E8F0;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;color:#475569;font-family:var(--font)" onclick="resetAnim()">↺ Reset</button>
+                  </div>
+                  <div id="animSteps">
+                    <div class="anim-step" id="as0"><div class="anim-num">1</div><div><strong>Sunlight Absorbed</strong> — Chlorophyll captures solar energy</div></div>
+                    <div class="anim-step" id="as1"><div class="anim-num">2</div><div><strong>Water Absorbed</strong> — Roots take H₂O from soil to leaves</div></div>
+                    <div class="anim-step" id="as2"><div class="anim-num">3</div><div><strong>CO₂ Absorbed</strong> — Stomata absorb CO₂ from air</div></div>
+                    <div class="anim-step" id="as3"><div class="anim-num">4</div><div><strong>Glucose Created</strong> — H₂O + CO₂ + Light → C₆H₁₂O₆ + O₂</div></div>
+                    <div class="anim-step" id="as4"><div class="anim-num">5</div><div><strong>Oxygen Released</strong> — O₂ released into atmosphere — the air we breathe!</div></div>
+                  </div>
+                </div>
+                <!-- Quiz -->
+                <h2>Check Your Understanding</h2>
+                <div class="quiz-box" id="quizBox">
+                  <div style="font-size:12px;color:#94A3B8;font-weight:700;margin-bottom:10px;font-family:var(--font)">Question <span id="qNum">1</span> of 3 · Formative Assessment</div>
+                  <div class="quiz-q" id="quizQ">Which is the FIRST step in the scientific method?</div>
+                  <div id="quizOpts">
+                    <div class="qopt" onclick="checkQ(this,false)"><span class="qbubble">A</span>Experiment with variables</div>
+                    <div class="qopt" onclick="checkQ(this,false)"><span class="qbubble">B</span>Form a hypothesis</div>
+                    <div class="qopt" onclick="checkQ(this,true)"><span class="qbubble">C</span>Observe and ask questions</div>
+                    <div class="qopt" onclick="checkQ(this,false)"><span class="qbubble">D</span>Draw conclusions</div>
+                  </div>
+                  <div class="quiz-fb" id="qFb"></div>
+                </div>
+                <!-- Mind Map -->
+                <h2>Concept Mind Map</h2>
+                <div class="mindmap">
+                  <div class="mm-center">🔬 Science</div>
+                  <div class="mm-grid">
+                    <div class="mm-node" onclick="showT('Observation: Using senses to gather information')">🔍 Observation</div>
+                    <div class="mm-node" onclick="showT('Experimentation: Testing hypotheses')">🧪 Experiment</div>
+                    <div class="mm-node" onclick="showT('Hypothesis: An educated, testable prediction')">💭 Hypothesis</div>
+                    <div class="mm-node" onclick="showT('Data Analysis: Finding patterns in results')">📊 Data Analysis</div>
+                    <div class="mm-node" onclick="showT('Application: Science solving real problems')">🌍 Application</div>
+                    <div class="mm-node" onclick="showT('Documentation: Recording findings for others')">📖 Documentation</div>
+                  </div>
+                  <div style="font-size:12px;color:#64748B;margin-top:12px;font-family:var(--font)">Tap any node to explore that concept</div>
+                </div>
+                <!-- Performance -->
+                <div class="perf-box">
+                  <div style="font-size:14px;font-weight:800;color:#059669;margin-bottom:14px;font-family:var(--font)">📈 Your Performance — Session 1</div>
+                  <div class="perf-row"><div class="perf-lbl">Reading</div><div class="perf-track"><div class="perf-bar" style="width:65%;background:linear-gradient(90deg,#3B82F6,#6366F1)"></div></div><span style="font-size:13px;font-weight:800;color:#3B82F6;margin-left:10px;font-family:var(--font)">65%</span></div>
+                  <div class="perf-row"><div class="perf-lbl">Quiz Score</div><div class="perf-track"><div class="perf-bar" style="width:80%;background:linear-gradient(90deg,#10B981,#34D399)"></div></div><span style="font-size:13px;font-weight:800;color:#10B981;margin-left:10px;font-family:var(--font)">80%</span></div>
+                  <div class="perf-row"><div class="perf-lbl">Simulation</div><div class="perf-track"><div class="perf-bar" style="width:100%;background:linear-gradient(90deg,#FF4D6D,#FF6B35)"></div></div><span style="font-size:13px;font-weight:800;color:#FF4D6D;margin-left:10px;font-family:var(--font)">Done ✓</span></div>
+                  <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;font-family:var(--font)">
+                    <span style="background:rgba(255,77,109,.15);color:#FF4D6D;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700">⭐ Badge: Quick Learner!</span>
+                    <span style="background:rgba(16,185,129,.15);color:#10B981;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700">📊 Synced to Teacher</span>
+                  </div>
+                </div>
+                <div class="callout callout-purple"><strong>✅ Session Complete!</strong> You've completed Session 1. Continue to Session 2 to explore the Methods of Science!</div>
+                <div style="height:24px"></div>
+              </div>
+            </div>
+          </div>
+          <div class="page-nav">
+            <button class="pnav-btn" onclick="showT('Previous page')">← Previous</button>
+            <span class="pnav-mid">Page 1 / 8</span>
+            <button class="pnav-btn" onclick="showT('Next page')">Next →</button>
+          </div>
+        </div>
+        <!-- BILINGUAL VIEW -->
+        <div id="bilingualView" style="display:none;flex:1;overflow:hidden">
+          <div class="bi-wrap" style="height:100%">
+            <div class="bi-pane">
+              <div class="bi-hd"><span class="bi-badge bi-ta">தமிழ்</span><span style="font-size:13px;color:#475569;margin-left:6px;font-weight:600;font-family:var(--font)">Tamil</span><div class="bi-audio" onclick="showT('🔊 Tamil audio...')">🔊</div></div>
+              <div class="book-content"><h2>அத்தியாயம் 1 — அறிவியலின் அற்புத உலகம்</h2><p>வானம் ஏன் நீல நிறமாக இருக்கிறது என்று நீங்கள் எப்போதாவது <strong style="color:#FF4D6D">ஆச்சரியப்பட்டிருக்கிறீர்களா</strong>? இரவில் நட்சத்திரங்கள் ஏன் மின்னுகின்றன?</p><div class="callout callout-orange"><strong>💡 தெரியுமா?</strong> "அறிவியல்" என்ற வார்த்தை லத்தீன் மொழியில் <em>scientia</em> என்பதிலிருந்து வந்தது — "அறிவு".</div><p>அறிவியல் என்பது <strong>முறையான வழியில்</strong> இயற்கை உலகை அவதானிப்பு மற்றும் சோதனை மூலம் புரிந்துகொள்வதாகும்.</p></div>
+            </div>
+            <div class="bi-divider"><div class="bi-ctrl" onclick="showT('🔗 Scroll linked')" title="Link scroll">🔗</div><div class="bi-ctrl" onclick="closeBilingual()" title="Close">✕</div></div>
+            <div class="bi-pane">
+              <div class="bi-hd"><span class="bi-badge bi-en">English</span><div class="bi-audio" style="margin-left:auto" onclick="showT('🔊 English audio...')">🔊</div></div>
+              <div class="book-content" style="background:#FAFBFF"><h2>Chapter 1 — The Wonderful World of Science</h2><p>Have you ever <strong style="color:#FF4D6D">wondered</strong> why the sky is blue, or why the stars twinkle at night?</p><div class="callout callout-orange"><strong>💡 Did You Know?</strong> The word "science" comes from the Latin <em>scientia</em>, meaning knowledge.</div><p>Science is a <strong>systematic way</strong> of understanding the natural world through observation, experimentation, and reasoning.</p></div>
+            </div>
+          </div>
+          <div class="esc-hint show" id="escHint"><span class="esc-key">Esc</span><span>to close split screen</span><span style="cursor:pointer;opacity:.7;font-size:16px" onclick="closeBilingual()">✕</span></div>
+        </div>
+        <!-- TEST VIEW -->
+        <div id="testView" style="display:none;flex:1;overflow:hidden">
+          <div class="test-wrap" style="height:100%">
+            <div class="test-book"><div class="bi-hd"><span class="bi-badge bi-en">Book Content</span></div><div class="book-content"><h2>Chapter 1</h2><p>Science is a systematic way of understanding the natural world through <strong>observation</strong>, <strong>experimentation</strong>, and <strong>logical reasoning</strong>...</p></div></div>
+            <div class="test-panel">
+              <div class="test-hd"><span>📝 Test — Chapter 1 · Session 1</span><span style="font-size:13px;opacity:.85">⏱ 14:32 remaining</span></div>
+              <div style="padding:20px;font-family:var(--font)">
+                <div class="quiz-box"><div style="font-size:12px;color:#94A3B8;margin-bottom:10px;font-weight:700">Q1 of 5</div><div class="quiz-q">What is the first step in the scientific method?</div><div class="qopt" onclick="testAns(this,true)"><span class="qbubble">A</span>Observation</div><div class="qopt" onclick="testAns(this,false)"><span class="qbubble">B</span>Hypothesis</div><div class="qopt" onclick="testAns(this,false)"><span class="qbubble">C</span>Experiment</div><div class="qopt" onclick="testAns(this,false)"><span class="qbubble">D</span>Conclusion</div></div>
+                <button style="width:100%;padding:13px;background:linear-gradient(135deg,#EF4444,#DC2626);color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:800;cursor:pointer;font-family:var(--font)" onclick="endTest()">End Test</button>
+              </div>
+            </div>
+          </div>
+          <div class="esc-hint show"><span class="esc-key">Esc</span><span>to end the Test</span><span style="cursor:pointer;opacity:.7;font-size:16px" onclick="endTest()">✕</span></div>
+        </div>
+      </div>
+      <!-- RIGHT PANELS -->
+      <div class="r-panel" id="panelSettings">
+        <div class="rp-hd"><span class="rp-title">⚙️ Settings</span><button class="rp-close" onclick="closePanel('panelSettings')">✕</button></div>
+        <div class="rp-body">
+          <span class="setting-lbl">Font Size</span>
+          <div class="fs-grid">
+            <div class="fs-opt" onclick="setFS(16,this)"><div style="font-size:13px">Aa</div><div style="font-size:11px;margin-top:3px">Small</div></div>
+            <div class="fs-opt on" onclick="setFS(19,this)"><div style="font-size:17px">Aa</div><div style="font-size:11px;margin-top:3px">Medium</div></div>
+            <div class="fs-opt" onclick="setFS(22,this)"><div style="font-size:21px">Aa</div><div style="font-size:11px;margin-top:3px">Large</div></div>
+          </div>
+          <span class="setting-lbl">Reader Width</span>
+          <div class="fs-grid">
+            <div class="fs-opt" onclick="setRW('580px',this)" style="font-size:11px">Small</div>
+            <div class="fs-opt on" onclick="setRW('740px',this)" style="font-size:11px">Medium</div>
+            <div class="fs-opt" onclick="setRW('960px',this)" style="font-size:11px">Large</div>
+          </div>
+          <span class="setting-lbl">Font Family</span>
+          <div class="ff-grid">
+            <div class="ff-opt" onclick="setFF('serif',this)" style="font-family:Georgia;font-size:13px">Serif</div>
+            <div class="ff-opt on" onclick="setFF('sans',this)" style="font-size:13px">Sans</div>
+            <div class="ff-opt" onclick="setFF('dyslexic',this)" style="font-size:12px">Dyslexic</div>
+          </div>
+          <span class="setting-lbl">Menu Language</span>
+          <select style="width:100%;padding:10px;border:2px solid #E2E8F0;border-radius:var(--r);font-size:14px;outline:none;font-family:var(--font);color:#334155;cursor:pointer" onchange="showT('Language: '+this.value)"><option>English</option><option>தமிழ் (Tamil)</option></select>
+          <span class="setting-lbl">Theme</span>
+          <div class="theme-dots">
+            <div class="theme-dot on" style="background:#fff" onclick="setTheme('light',this)" title="Light"></div>
+            <div class="theme-dot" style="background:#1C2238" onclick="setTheme('dark',this)" title="Dark"></div>
+            <div class="theme-dot" style="background:#F5EDD6" onclick="setTheme('sepia',this)" title="Sepia"></div>
+            <div class="theme-dot" style="background:#F0FDF4" onclick="setTheme('green',this)" title="Green"></div>
+          </div>
+          <span class="setting-lbl">Accessibility</span>
+          <div class="a11y-row"><span>High Contrast</span><div class="tog" onclick="togSw(this,'hc')"><div class="tog-k"></div></div></div>
+          <div class="a11y-row"><span>Screen Reader</span><div class="tog" onclick="togSw(this,'sr')"><div class="tog-k"></div></div></div>
+          <div class="a11y-row"><span>Bilingual Captions</span><div class="tog on" onclick="togCap(this)"><div class="tog-k" style="left:21px"></div></div></div>
+          <div class="a11y-row"><span>Offline Mode</span><div class="tog" onclick="togOff(this)"><div class="tog-k"></div></div></div>
+        </div>
+      </div>
+      <div class="r-panel" id="panelStudy">
+        <div class="rp-hd"><span class="rp-title">📝 Study Tools</span><button class="rp-close" onclick="closePanel('panelStudy')">✕</button></div>
+        <div class="rp-body">
+          <span class="setting-lbl">Bookmarks</span>
+          <div class="bkmk-item">📌 Page 1 — Introduction to Science<span style="margin-left:auto;font-size:11px;color:#94A3B8">Today</span></div>
+          <div class="bkmk-item">📌 Page 4 — Scientific Method<span style="margin-left:auto;font-size:11px;color:#94A3B8">Today</span></div>
+          <span class="setting-lbl">Highlights</span>
+          <div class="hl-item"><div style="width:12px;height:12px;background:#FEF08A;border-radius:50%;flex-shrink:0;margin-top:3px"></div>"wondered why the sky is blue"</div>
+          <div class="hl-item"><div style="width:12px;height:12px;background:#E9D5FF;border-radius:50%;flex-shrink:0;margin-top:3px"></div>"systematic way of understanding"</div>
+          <span class="setting-lbl">Notes</span>
+          <textarea class="note-ta" placeholder="Write your notes here...">Science is everywhere — kitchen, playground, sky! Connect examples with daily life.</textarea>
+          <button style="margin-top:10px;padding:10px 22px;background:linear-gradient(135deg,var(--pk),var(--pu));color:#fff;border:none;border-radius:var(--r);font-size:13px;font-weight:800;cursor:pointer;font-family:var(--font)" onclick="showT('💾 Note saved!')">Save Note</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="play-bar" style="position:relative">
+    <button class="pb-btn" id="pbBtn" onclick="togglePlay()">▶</button>
+    <span class="pb-label">Session 1 — Introduction to Science</span>
+    <div class="pb-track"><div class="pb-fill" id="pbFill" style="width:38%"></div></div>
+    <span class="pb-time" id="pbTime">1:24 / 3:47</span>
+  </div>
+</div>
+
+</div><!-- app -->
+
+<script>
+'use strict';
+var navStack=[],curPg='pgLogin',openPanelId=null;
+var isPlaying=false,audioP=38,spdIdx=1,spds=['0.75×','1.0×','1.25×','1.5×'];
+var hlOn=false,biOn=false,testOn=false,bookmarked=false;
+var qIdx=0,qScore=0;
+var animT=null,animStep=0;
+var selTxt='';
+
+var stepData=[
+  '<strong>Step 1 — Observe</strong><br/>Use your senses to notice something in the world. Example: You notice a plant near a window grows faster than one in a dark room.',
+  '<strong>Step 2 — Ask a Question</strong><br/>Form a specific, testable question. Example: "Does the amount of light affect how fast a plant grows?"',
+  '<strong>Step 3 — Form a Hypothesis</strong><br/>Make an educated, testable prediction. Example: "If a plant gets more light, it will grow taller."',
+  '<strong>Step 4 — Experiment</strong><br/>Design a controlled test. Change ONE variable at a time and record all results carefully.',
+  '<strong>Step 5 — Analyze &amp; Conclude</strong><br/>Examine data, find patterns, draw conclusions based on evidence. Share your findings!'
+];
+var quizData=[
+  {q:'Which is the FIRST step in the scientific method?',opts:['Experiment with variables','Form a hypothesis','Observe and ask questions','Draw conclusions'],ans:2,ex:'✅ Correct! Observation is always first — scientists begin by carefully noticing something in the world.'},
+  {q:'What is a hypothesis?',opts:['A proven fact','An educated, testable prediction','The final conclusion','A type of experiment'],ans:1,ex:'✅ Correct! A hypothesis is an educated, testable prediction that can be proven right or wrong.'},
+  {q:'In a controlled experiment, which variable does the scientist CHANGE?',opts:['Controlled variable','Dependent variable','Independent variable','Constant'],ans:2,ex:'✅ Correct! The independent variable is deliberately changed to observe its effect.'}
+];
+
+// NAV
+function showPg(id){
+  if(curPg===id)return;
+  navStack.push(curPg);
+  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  curPg=id;
+  document.querySelectorAll('.drop-menu,.lang-menu').forEach(m=>m.classList.remove('open'));
+  if(id==='pgReader')updateSim();
+}
+function goBack(){
+  if(!navStack.length)return;
+  var p=navStack.pop();
+  document.querySelectorAll('.pg').forEach(e=>e.classList.remove('on'));
+  document.getElementById(p).classList.add('on');
+  curPg=p;
+}
+
+// TOAST
+function showT(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),3000)}
+function showToast(m){showT(m)}
+
+// DROPDOWNS
+function toggleMenu(id){
+  var el=document.getElementById(id);
+  var was=el.classList.contains('open');
+  document.querySelectorAll('.drop-menu,.lang-menu').forEach(m=>m.classList.remove('open'));
+  if(!was)el.classList.add('open');
+}
+document.addEventListener('click',e=>{
+  if(!e.target.closest('[onclick*="toggleMenu"]')&&!e.target.closest('.drop-menu')&&!e.target.closest('.lang-menu'))
+    document.querySelectorAll('.drop-menu,.lang-menu').forEach(m=>m.classList.remove('open'));
+});
+function setGrade(el,g){document.querySelectorAll('#gradeMenu .dm-item').forEach(i=>i.classList.remove('on'));el.classList.add('on');document.getElementById('gradeLabel').textContent=g;showT('Class: '+g+' Standard')}
+function setLang(el,n,f){document.querySelectorAll('#langMenu .lm-item').forEach(i=>i.classList.remove('on'));el.classList.add('on');document.getElementById('langLabel').textContent=n;document.getElementById('langFlag').textContent=f;showT('Language: '+n)}
+function setRdLang(el,n,f){document.querySelectorAll('#rdLangMenu .lm-item').forEach(i=>i.classList.remove('on'));el.classList.add('on');document.getElementById('rdLangFlag').textContent=f;document.getElementById('rdLangLabel').textContent=n;showT('Language: '+n)}
+
+// LOGIN
+var roleConfig={
+  student:{lbl:'Student ID (Optional)',hint:'You can skip this and read as guest',pwd:false,fwd:false,btn:'📖 Read as Guest →',note:true},
+  teacher:{lbl:'Username',hint:'Enter your assigned teacher username',pwd:true,fwd:true,btn:'🔐 Sign In',note:false},
+  parent:{lbl:'Parent ID (Optional)',hint:'Enter ID or continue as guest',pwd:false,fwd:false,btn:'📖 Continue as Guest →',note:false}
+};
+function setRole(el,role){
+  document.querySelectorAll('.rtab').forEach(t=>t.classList.remove('on'));el.classList.add('on');
+  var c=roleConfig[role];
+  document.getElementById('fUserLbl').textContent=c.lbl;
+  document.getElementById('fUserHint').textContent=c.hint;
+  document.getElementById('fPwd').style.display=c.pwd?'block':'none';
+  document.getElementById('fwRow').style.display=c.fwd?'flex':'none';
+  document.getElementById('loginBtn').textContent=c.btn;
+  document.getElementById('stuNote').classList.toggle('show',c.note);
+  window._role=role;
+}
+function doLogin(){
+  var role=window._role||'student';
+  var names={student:'Jeevitha',teacher:'Mrs. Lakshmi Devi',parent:'Ramesh (Parent)'};
+  var roles={student:'Student',teacher:'Teacher',parent:'Parent'};
+  var avs={student:'JS',teacher:'LK',parent:'RM'};
+  var n=names[role],r=roles[role],av=avs[role];
+  ['acctAv','rdAv'].forEach(id=>{var e=document.getElementById(id);if(e)e.textContent=av});
+  document.getElementById('acctName').textContent=n;
+  document.getElementById('acctRole').textContent=r;
+  document.getElementById('heroName').textContent=n+'! 🌟';
+  document.getElementById('heroBadge').textContent=role==='teacher'?'👨‍🏫 Teacher Dashboard':'🏆 6,584 Points · Level 3';
+  showPg('pgDash');
+  showT('Welcome back, '+n+'! 🎉');
+}
+function onSearch(q){if(q.length>1)showT('🔍 Searching: "'+q+'"...')}
+
+// CLASS SELECT
+function selClass(el,c){document.querySelectorAll('.cls-card').forEach(x=>x.classList.remove('sel'));el.classList.add('sel');showT(c+' selected');setTimeout(()=>showPg('pgChapter'),350)}
+
+// READER TOOLS
+function toggleIndex(){var p=document.getElementById('indexPanel');p.classList.toggle('closed');document.getElementById('idxTab').textContent=p.classList.contains('closed')?'☰':'☰'}
+function toggleAudio(){
+  isPlaying=!isPlaying;
+  var lb=document.getElementById('listenBtn');
+  lb.style.background=isPlaying?'linear-gradient(135deg,#FF6B35,#7C3AED)':'linear-gradient(135deg,#FF4D6D,#FF6B35)';
+  lb.textContent=isPlaying?'⏸ Listening...':'▶ Listen Audio';
+  if(isPlaying){document.getElementById('captionsBar').classList.add('show');showT('🔊 Audio playing...')}
+  else document.getElementById('captionsBar').classList.remove('show');
+}
+function toggleAudioBox(){var b=document.getElementById('audioBox');var btn=document.getElementById('audioToggleBtn');var v=b.style.display==='none';b.style.display=v?'block':'none';btn.classList.toggle('on',v);btn.textContent=v?'🔊 Hide Audio':'🔊 Listen Audio'}
+function doBookmark(){bookmarked=!bookmarked;var b=document.getElementById('bkmkSessBtn');if(b){b.classList.toggle('on',bookmarked);b.textContent=bookmarked?'🔖 Bookmarked!':'🔖 Bookmark Session'}showT(bookmarked?'📌 Bookmarked!':'🔖 Removed')}
+function toggleHL(){hlOn=!hlOn;document.getElementById('tbHL').classList.toggle('on',hlOn);document.getElementById('hlBar').classList.toggle('show',hlOn);if(hlOn)showT('🖊 Select text then choose color')}
+function toggleWordBox(){var b=document.getElementById('wordBox');var v=b.style.display==='none';b.style.display=v?'block':'none';document.getElementById('tbWord').classList.toggle('on',v)}
+function showWord(w,pos,def,tamil){
+  document.getElementById('wordBox').style.display='block';
+  document.getElementById('tbWord').classList.add('on');
+  document.getElementById('wbWord').textContent=w;
+  document.getElementById('wbPos').textContent=pos.toUpperCase()+' · ENGLISH';
+  document.getElementById('wbDef').textContent=def;
+  document.getElementById('wbTamil').innerHTML='தமிழ்: <strong>'+tamil+'</strong>';
+}
+function toggle3D(){document.getElementById('tb3D').classList.toggle('on');var b=document.getElementById('box3D');b.style.display=b.style.display==='none'?'block':'none'}
+function openPanel(id){
+  if(openPanelId&&openPanelId!==id){var p=document.getElementById(openPanelId);if(p)p.classList.remove('open')}
+  var el=document.getElementById(id);el.classList.toggle('open');
+  openPanelId=el.classList.contains('open')?id:null;
+  document.getElementById('tbSettings').classList.toggle('on',id==='panelSettings'&&el.classList.contains('open'));
+}
+function closePanel(id){var el=document.getElementById(id);if(el)el.classList.remove('open');openPanelId=null;document.getElementById('tbSettings').classList.remove('on')}
+function activateBilingual(){if(curPg!=='pgReader'){showT('Open a book first');return}biOn=true;testOn=false;document.getElementById('normalView').style.display='none';document.getElementById('bilingualView').style.display='flex';document.getElementById('testView').style.display='none';showT('⚖️ Bilingual — Tamil | English')}
+function closeBilingual(){biOn=false;document.getElementById('normalView').style.display='flex';document.getElementById('bilingualView').style.display='none';var eh=document.getElementById('escHint');if(eh)eh.style.display='none'}
+function endTest(){testOn=false;document.getElementById('normalView').style.display='flex';document.getElementById('testView').style.display='none'}
+function scrollSec(id){var el=document.getElementById(id);var rs=document.getElementById('rScroll');if(el&&rs)rs.scrollTo({top:el.offsetTop-60,behavior:'smooth'})}
+
+// AUDIO
+var audTimer=null;
+function togglePlay(){
+  isPlaying=!isPlaying;
+  var mb=document.getElementById('mainPlayBtn'),pb=document.getElementById('pbBtn');
+  if(mb)mb.textContent=isPlaying?'⏸':'▶';
+  if(pb)pb.textContent=isPlaying?'⏸':'▶';
+  if(isPlaying){
+    document.getElementById('captionsBar').classList.add('show');
+    document.getElementById('listenBtn').textContent='⏸ Listening...';
+    document.getElementById('listenBtn').style.background='linear-gradient(135deg,#FF6B35,#7C3AED)';
+    audTimer=setInterval(()=>{
+      audioP=Math.min(100,audioP+0.25);
+      var f=document.getElementById('audioFill');if(f)f.style.width=audioP+'%';
+      var pf=document.getElementById('pbFill');if(pf)pf.style.width=audioP+'%';
+      var s=Math.round(audioP/100*227);var ts=Math.floor(s/60)+':'+String(s%60).padStart(2,'0')+' / 3:47';
+      var at=document.getElementById('audioTime');if(at)at.textContent=ts;
+      var pt=document.getElementById('pbTime');if(pt)pt.textContent=ts;
+      if(audioP>=100){isPlaying=false;clearInterval(audTimer);if(mb)mb.textContent='▶';if(pb)pb.textContent='▶';showT('✅ Audio complete!')}
+    },200);
+  } else {
+    clearInterval(audTimer);
+    document.getElementById('captionsBar').classList.remove('show');
+    document.getElementById('listenBtn').textContent='▶ Listen Audio';
+    document.getElementById('listenBtn').style.background='linear-gradient(135deg,#FF4D6D,#FF6B35)';
+  }
+}
+function seekAudio(e,t){var r=t.getBoundingClientRect();audioP=Math.max(0,Math.min(100,(e.clientX-r.left)/r.width*100));var f=document.getElementById('audioFill');if(f)f.style.width=audioP+'%'}
+function setMode(m,el){document.querySelectorAll('.a-mode').forEach(b=>b.classList.remove('on'));el.classList.add('on');showT('Mode: '+m)}
+function cycleSpd(el){spdIdx=(spdIdx+1)%spds.length;el.textContent=spds[spdIdx];showT('Speed: '+spds[spdIdx])}
+
+// HIGHLIGHT
+function applyHL(cls){
+  var sel=window.getSelection();
+  if(sel&&sel.rangeCount>0&&!sel.isCollapsed){
+    var range=sel.getRangeAt(0);var span=document.createElement('span');
+    span.className=cls;span.onclick=function(){this.outerHTML=this.innerHTML};span.title='Click to remove';
+    try{range.surroundContents(span);sel.removeAllRanges();showT('Highlighted!')}
+    catch(e){showT('Select a clean text range')}
+  } else showT('Select some text first');
+  hideSelBar();
+}
+function clearHL(){document.querySelectorAll('.uhl-y,.uhl-g,.uhl-b,.uhl-p').forEach(e=>e.outerHTML=e.innerHTML);showT('Highlights cleared')}
+
+// SELECTION TOOLBAR
+document.addEventListener('mouseup',e=>{
+  if(e.target.closest('#selToolbar'))return;
+  var sel=window.getSelection();
+  if(sel&&sel.toString().trim().length>2){
+    selTxt=sel.toString().trim();
+    var tb=document.getElementById('selToolbar');
+    var rng=sel.getRangeAt(0).getBoundingClientRect();
+    tb.style.top=(rng.top+window.scrollY-54)+'px';
+    tb.style.left=Math.max(8,rng.left+rng.width/2-200)+'px';
+    tb.classList.add('show');
+  } else hideSelBar();
+});
+function hideSelBar(){document.getElementById('selToolbar').classList.remove('show')}
+function stNote(){hideSelBar();openPanel('panelStudy');showT('📝 Adding note for: "'+selTxt.substring(0,28)+'..."')}
+function stHL(){hideSelBar();applyHL('uhl-y')}
+function stMeaning(){hideSelBar();showWord(selTxt.split(' ')[0],'noun','Definition for selected text: "'+selTxt+'"','Translation loading...')}
+function stAudio(){hideSelBar();showT('🔊 Playing: "'+selTxt.substring(0,40)+'..."')}
+function stTranslate(){hideSelBar();showT('🌐 Translating to தமிழ்...')}
+function stClarify(){hideSelBar();showT('💬 Clarifying: "'+selTxt.substring(0,30)+'..."')}
+function stSearch(){hideSelBar();showT('🤖 AI searching: "'+selTxt.substring(0,30)+'..."')}
+
+// DIAGRAM
+function showStep(i,el){document.querySelectorAll('.step-node').forEach(n=>n.classList.remove('on'));el.classList.add('on');var b=document.getElementById('stepInfoBox');b.innerHTML=stepData[i];b.classList.add('show')}
+function showHS(el,msg){var i=document.getElementById('hsInfo');i.textContent=msg;i.classList.add('show')}
+
+// ANIMATION
+function startAnim(){resetAnim();animStep=0;animT=setInterval(()=>{var el=document.getElementById('as'+animStep);if(el)el.classList.add('active');animStep++;if(animStep>4){clearInterval(animT);showT('🎬 Animation complete!')}},700)}
+function resetAnim(){clearInterval(animT);animStep=0;for(var i=0;i<5;i++){var e=document.getElementById('as'+i);if(e)e.classList.remove('active')}}
+
+// SIMULATION
+function updateSim(){
+  var L=document.getElementById('simL'),G=document.getElementById('simG');
+  if(!L||!G)return;
+  var l=parseFloat(L.value)/100,g=parseFloat(G.value);
+  document.getElementById('simLV').textContent=Math.round(l*100)+' cm';
+  document.getElementById('simGV').textContent=g;
+  var T=2*Math.PI*Math.sqrt(l/g);
+  document.getElementById('simT').textContent=T.toFixed(2);
+  document.getElementById('simF').textContent=(1/T).toFixed(2);
+  document.getElementById('simNote').textContent=l>0.7?'Longer string → slower swing!':l<0.3?'Shorter string → faster swing!':'Adjust sliders to observe!';
+}
+
+// QUIZ
+function checkQ(el,correct){
+  document.querySelectorAll('.qopt').forEach(o=>{o.onclick=null;o.classList.add('locked')});
+  el.classList.add(correct?'correct':'wrong');
+  if(correct)qScore++;
+  var fb=document.getElementById('qFb');fb.classList.add('show');
+  if(correct){fb.style.cssText='display:block;background:#ECFDF5;color:#059669;border:2px solid #A7F3D0;padding:13px 16px;border-radius:12px;font-size:14px;line-height:1.7;font-family:var(--font)';fb.textContent=quizData[qIdx].ex;showT('🎉 Correct! +10 XP')}
+  else{fb.style.cssText='display:block;background:#FEF2F2;color:#DC2626;border:2px solid #FECACA;padding:13px 16px;border-radius:12px;font-size:14px;line-height:1.7;font-family:var(--font)';fb.textContent='❌ '+quizData[qIdx].ex}
+  setTimeout(()=>{
+    qIdx++;
+    if(qIdx>=quizData.length){document.getElementById('quizBox').innerHTML='<div style="text-align:center;padding:28px;font-family:var(--font)"><div style="font-size:52px">🎉</div><div style="font-size:22px;font-weight:800;color:#0C0F1A;margin:12px 0">Quiz Complete!</div><div style="font-size:16px;color:#475569">Score: '+qScore+'/3 — '+(qScore===3?'Perfect! 🌟':qScore>=2?'Great job! 💪':'Keep practicing! 📚')+'</div><button style="margin-top:18px;padding:13px 30px;background:linear-gradient(135deg,#FF4D6D,#7C3AED);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer;font-family:var(--font)" onclick="location.reload()">Retry Quiz</button></div>';showT('🏆 Quiz done! Score: '+qScore+'/3');return}
+    var q=quizData[qIdx];document.getElementById('qNum').textContent=qIdx+1;document.getElementById('quizQ').textContent=q.q;
+    var f=document.getElementById('qFb');f.classList.remove('show');f.textContent='';
+    var l=['A','B','C','D'];var html='';q.opts.forEach((o,i)=>html+='<div class="qopt" onclick="checkQ(this,'+(i===q.ans)+')"><span class="qbubble">'+l[i]+'</span>'+o+'</div>');
+    document.getElementById('quizOpts').innerHTML=html;
+  },2800);
+}
+function testAns(el,c){el.classList.add(c?'correct':'wrong');el.onclick=null;showT(c?'✅ Correct! +20 XP':'❌ Incorrect')}
+
+// SETTINGS
+function setFS(sz,el){document.querySelectorAll('.fs-opt').forEach(e=>e.classList.remove('on'));el.classList.add('on');document.getElementById('bookContent').style.fontSize=sz+'px';showT('Font: '+sz+'px')}
+function setRW(w,el){document.querySelectorAll('.fs-opt').forEach(e=>e.classList.remove('on'));el.classList.add('on');document.getElementById('bookContent').style.maxWidth=w;showT('Width updated')}
+function setFF(f,el){document.querySelectorAll('.ff-opt').forEach(e=>e.classList.remove('on'));el.classList.add('on');var bc=document.getElementById('bookContent');bc.style.fontFamily=f==='serif'?'Georgia,serif':f==='dyslexic'?'"Comic Sans MS",cursive':'inherit';showT('Font family: '+f)}
+function setTheme(t,el){document.querySelectorAll('.theme-dot').forEach(e=>e.classList.remove('on'));el.classList.add('on');var bc=document.getElementById('bookContent');if(t==='dark'){bc.style.background='#1C2238';bc.style.color='#E2E8F0'}else if(t==='sepia'){bc.style.background='#F5EDD6';bc.style.color='#3B2A1A'}else if(t==='green'){bc.style.background='#F0FDF4';bc.style.color='#14532D'}else{bc.style.background='';bc.style.color=''}showT('Theme: '+t)}
+function togSw(el,t){el.classList.toggle('on');var k=el.querySelector('.tog-k');k.style.left=el.classList.contains('on')?'21px':'2px';var on=el.classList.contains('on');if(t==='hc'){document.documentElement.style.filter=on?'contrast(1.5)':'';showT(on?'High contrast ON':'Normal')}if(t==='sr')showT(on?'Screen reader ON':'Screen reader OFF')}
+function togCap(el){el.classList.toggle('on');var k=el.querySelector('.tog-k');k.style.left=el.classList.contains('on')?'21px':'2px';document.getElementById('captionsBar').classList.toggle('show',el.classList.contains('on'))}
+function togOff(el){el.classList.toggle('on');var k=el.querySelector('.tog-k');k.style.left=el.classList.contains('on')?'21px':'2px';document.getElementById('offlineBar').classList.toggle('show',el.classList.contains('on'));showT(el.classList.contains('on')?'📴 Offline mode':'📶 Online')}
+
+// ESC
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){hideSelBar();if(biOn)closeBilingual();else if(testOn)endTest();else if(openPanelId)closePanel(openPanelId)}
+  if(e.altKey){if(e.key==='ArrowLeft'){goBack();showT('← Back')}if(e.key.toLowerCase()==='a')toggleAudioBox();if(e.key.toLowerCase()==='t')toggleIndex()}
+});
+
+window.addEventListener('load',()=>{updateSim();document.getElementById('escHint').style.display='none'});
+</script>
+</body>
+</html>
